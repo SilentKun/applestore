@@ -1,0 +1,10 @@
+﻿.color {
+    color: black;
+    outline: 0 !important;
+    transition: color 500ms ease-out;
+}
+    .color:hover {
+        color: #2d99f1;
+        text-decoration: none;
+        transition: color 500ms ease-out;
+    }

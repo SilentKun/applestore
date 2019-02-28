@@ -1,0 +1,27 @@
+﻿@using AppleStore.Domain.Entities
+@model IEnumerable<Gadget>
+
+@if (@HttpContext.Current.User.Identity.IsAuthenticated)
+{
+    <div>
+        Здравствуйте: @HttpContext.Current.User.Identity.Name
+
+
+    </div>
+    <div>
+        <a class="btn btn-primary" href='@Url.Action("Logout", "Account")'>Выйти из аккаунта</a>
+    </div>
+
+    foreach (var line in Model)
+    {
+    <tr>
+        <td class="text-center">@line.Name</td>
+        <td class="text-left">@line.Price<br></td>
+    </tr>
+    }
+}
+@if (!@HttpContext.Current.User.Identity.IsAuthenticated)
+{<div>Авторизируйтесь!</div>}
+
+
+

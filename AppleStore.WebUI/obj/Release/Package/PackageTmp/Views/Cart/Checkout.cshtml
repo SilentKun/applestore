@@ -1,0 +1,47 @@
+﻿@model AppleStore.Domain.Entities.ShippingDetails
+
+@{
+    ViewBag.Title = "AppleStore: форма заказа";
+}
+
+<h2>Оформить заказ сейчас</h2>
+<p>Пожалуйста введи ваши контактные данные, и мы сразу отправим товар!</p>
+
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary();
+
+    <h3 class="title-h3">Информация для доставки:</h3>
+    <ul id="info-order">
+        <li>
+            <label for="NameInput">ФИО</label>
+            @Html.TextBoxFor(x => x.Name, new { @class = "form-control", @id = "NameInput", @placeholder = "Стивен Пол Джобс" })
+        </li>
+        <li>
+            <label for="AdressInput">Адрес доставки</label>
+            @Html.TextBoxFor(x => x.DeliveryAddress, new { @class = "form-control", @id = "AdressInput", @placeholder = "г. Москва, ул. Чехова 123" })
+        </li>
+        <li>
+            <label for="TelephoneInput">Номер телефона</label>
+            @Html.TextBoxFor(x => x.Phone, new { @class = "form-control", @id = "TelephoneInput", @placeholder = "+7 912 545 13 53" })
+        </li>
+        <li>
+            <label for="EmailInput">Email</label>
+            @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @id = "EmailInput", @placeholder = "name@example.com" })
+        </li>
+    </ul>
+
+
+    <h3>Опции</h3>
+    <div class="checkbox">
+        <label>
+            @Html.EditorFor(x => x.GiftWrap)
+            Использовать подарочную упаковку?
+        </label>
+    </div>
+
+    <div class="text-center">
+        <input class="btn btn-primary" type="submit" value="Обработать заказ" />
+    </div>
+}

@@ -1,0 +1,19 @@
+﻿@using System.Web.UI.WebControls
+@model AppleStore.Domain.Entities.Gadget
+<link href="~/Content/Styles.css" rel="stylesheet" />
+<div class="well">
+    <img class="imgOnMainPage" src="@Url.Action("GetImage", "Gadget", new { Model.GadgetId })">
+         <h3>
+        @Html.ActionLink(Model.Name, "Details", "Gadget", new { gadgetId = Model.GadgetId }, new { @class = "color"})
+        <span class="pull-right label label-primary">@Model.Price.ToString("# руб")</span>
+    </h3>
+   
+    @using (Html.BeginForm("AddToCart", "Cart"))
+    {
+        <div class="pull-right">
+            @Html.HiddenFor(x => x.GadgetId)
+            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+            <input type="submit" class="btn btn-success" value="Добавить в корзину" />
+        </div>
+    }
+</div>

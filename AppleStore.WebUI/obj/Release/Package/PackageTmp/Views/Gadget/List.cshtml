@@ -1,0 +1,17 @@
+﻿@using AppleStore.WebUI.Models
+@using AppleStore.WebUI.HtmlHelpers
+@model GadgetsListViewModel
+
+@{
+    ViewBag.Title = "Товары";
+}
+
+@foreach (var p in @Model.Gadgets)
+{
+    @Html.Partial("GadgetSummary", p)
+}
+
+<div class="btn-group pull-right">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List",
+        new { page = x, category = Model.CurrentCategory }))
+</div>
