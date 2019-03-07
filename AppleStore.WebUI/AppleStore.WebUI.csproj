@@ -141,6 +141,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css.css" />
     <Content Include="Content\ErrorStyles.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\Styles.css" />
@@ -148,6 +149,7 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Properties\PublishProfiles\AppleStore1 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -209,26 +211,20 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Shared\GadgetSummary.cshtml" />
+    <Content Include="Views\Gadget\GadgetSummary.cshtml" />
     <Content Include="Views\Nav\Menu.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Cart\Summary.cshtml" />
     <Content Include="Views\Cart\Checkout.cshtml" />
     <Content Include="Views\Cart\Completed.cshtml" />
-    <Content Include="Views\Nav\MenuHorizontal.cshtml" />
-    <Content Include="Views\Nav\FlexMenu.cshtml" />
-    <Content Include="Views\Shared\_Layout.Mobile.cshtml" />
-    <Content Include="Views\Nav\FlexMenu.Mobile.cshtml" />
-    <Content Include="Views\Shared\GadgetSummary.Mobile.cshtml" />
-    <Content Include="Views\Shared\_AdminLayout.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Gadget\Details.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Gadget\DisplayGadgets.cshtml" />
     <Content Include="Views\Gadget\Search.cshtml" />
+    <Content Include="Views\Cart\NotInCart.cshtml" />
+    <Content Include="Views\Cart\HaveInCart.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

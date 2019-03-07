@@ -1,27 +1,51 @@
 ﻿@using AppleStore.Domain.Entities
 @model IEnumerable<Gadget>
-
-@if (@HttpContext.Current.User.Identity.IsAuthenticated)
-{
-    <div>
-        Здравствуйте: @HttpContext.Current.User.Identity.Name
-
-
-    </div>
-    <div>
-        <a class="btn btn-primary" href='@Url.Action("Logout", "Account")'>Выйти из аккаунта</a>
-    </div>
-
-    foreach (var line in Model)
+<div class="container">
+    @if (@HttpContext.Current.User.Identity.IsAuthenticated)
     {
-    <tr>
-        <td class="text-center">@line.Name</td>
-        <td class="text-left">@line.Price<br></td>
-    </tr>
+        <div class="hello">
+            <p>Здравствуйте: @HttpContext.Current.User.Identity.Name</p>
+
+        </div>
+        <div class="orders">
+            Ваши заказы
+        </div>
+        foreach (var line in Model)
+        {
+            <div class="block-list-cart">
+
+                <div class="img-cart">
+                    <p class="ImgForBasket"> <img src="@Url.Action("GetImage", "Gadget", new { line.GadgetId })" alt="" class="picInBasket"></p>
+                </div>
+                <div class="title-cart">
+                    <p> <a href="/Gadget/Details?gadgetId=@line.GadgetId">@line.Name</a> </p>
+                </div>
+
+
+                <div class="price-product">
+                    <h5>@line.Price.ToString("# руб")</h5> <p></p>
+                </div>
+
+                <div id="bottom-cart-line">
+                </div>
+            </div>
+
+        }
+
+
+
     }
-}
-@if (!@HttpContext.Current.User.Identity.IsAuthenticated)
-{<div>Авторизируйтесь!</div>}
+
+</div>
+    @*@if (!@HttpContext.Current.User.Identity.IsAuthenticated)
+    {<div>Авторизируйтесь!</div>}
 
 
+</div>
+<div>
+    Здравствуйте: @HttpContext.Current.User.Identity.Name
 
+</div>
+<div>
+    <a class="btn btn-primary" href='@Url.Action("Logout", "Account")'>Выйти из аккаунта</a>
+</div>*@

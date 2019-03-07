@@ -1,106 +1,123 @@
 ﻿@model AppleStore.Domain.Entities.Gadget
 
-<div>
-    <h4>@Html.DisplayFor(model => model.Name)</h4>
-    <hr />
-    <dl class="dl-horizontal">
+@using AppleStore.WebUI.HtmlHelpers
 
-        <div class="pull-left" style="margin-right: 10px">
-            <img class="img-thumbnail" width="75" height="75"
-                 src="@Url.Action("GetImage", "Gadget",
-                          new { Model.GadgetId })" />
+@{
+    ViewBag.Title = "Apple Store";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="discription-in-moreAbout">
+        <div>
+            <img src="@Url.Action("GetImage", "Gadget", new { Model.GadgetId })" alt="" class="photo">
+        </div>
+        <div class="DescriptionTop">
+            <h3 class="Name">«@Model.Name»</h3>
+            <div class="Specifications">
+                <ul>
+                    <li>
+                        <span class="specification">Материал корпуса: </span><span class="spec">@Model.Material</span>
+                    </li>
+                    <li>
+                        <span class="specification">Процессор: </span><span class="spec">@Model.CPU</span>
+                    </li>
+                    <li>
+                        <span class="specification">Количество оперативной памяти: </span><span class="spec">@Model.RAM</span>
+                    </li>
+                    <li>
+                        <span class="specification">Разрешение экрана: </span><span class="spec">@Model.Resolution</span>
+                    </li>
+                </ul>
+            </div>
+            <h1 class="Price" style="margin-bottom: -15px;">@Model.Price.ToString("# руб")</h1>
+            <div class="button-cart">
+                 @Html.Action("HaveGadgetInCart", "Cart", new { gadgetid = Model.GadgetId })</div>
         </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
+        <div class="Description">
+            <div class="Specifications">
+                <br>
+                <h5>Подробные характеристики</h5>
+                <ul>
+                    <li>
+                        <span class="specification">Операционная система: </span> <span class="spec">@Model.OperatingSystem</span>
+                    </li>
 
-        <dd>
-            @Html.DisplayFor(model => model.Category)
-        </dd>
+                    <li>
+                        <span class="specification">Диагональ экрана: </span><span class="spec">@Model.Diagonal</span>
+                    </li>
+                    <li>
+                        <span class="specification">Соотношение сторон: </span><span class="spec">@Model.AspectRatio</span>
+                    </li>
+                    <li>
+                        <span class="specification">Тип экрана: </span><span class="spec">@Model.DisplayTechnology</span>
+                    </li>
+                    <li>
+                        <span class="specification">Количество памяти: </span><span class="spec">@Model.ROM</span>
+                    </li>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        <div class="Specifications">
-            <br>
-            <h5 class="characteristic">Характеристики</h5>
-            <ul>
-                <li>
-                    <span class="specification">Операционная система: </span> <span class="spec">@Model.OperatingSystem</span>
-                </li>
-
-                <li>
-                    <span class="specification">Разрешение экрана: </span><span class="spec">@Model.Resolution</span>
-                </li>
-                <li>
-                    <span class="specification">Диагональ экрана: </span><span class="spec">@Model.Diagonal</span>
-                </li>
-                <li>
-                    <span class="specification">Соотношение сторон: </span><span class="spec">@Model.AspectRatio</span>
-                </li>
-                <li>
-                    <span class="specification">Тип экрана: </span><span class="spec">@Model.DisplayTechnology</span>
-                </li>
-                <li>
-                    <span class="specification">Процессор: </span><span class="spec">@Model.CPU</span>
-                </li>
-                <li>
-                    <span class="specification">Количество памяти: </span><span class="spec">@Model.ROM</span>
-                </li>
-                <li>
-                    <span class="specification">Камера: </span><span class="spec">@Model.CameraResolution</span>
-                </li>
-                <li>
-                    <span class="specification">Габариты: </span><span class="spec">@Model.Measurements</span>
-                </li>
-                <li>
-                    <span class="specification">PPI: </span><span class="spec">@Model.PixelsPerInch</span>
-                </li>
-                <li>
-                    <span class="specification">Вес: </span><span class="spec">@Model.Weight</span>
-                </li>
-                <li>
-                    <span class="specification">Материал корпуса: </span><span class="spec">@Model.Material</span>
-                </li>
-                <li>
-                    <span class="specification">Тип симкарты: </span><span class="spec">@Model.SIMType</span>
-                </li>
-                <li>
-                    <span class="specification">Наличие влагозащиты: </span><span class="spec">@Model.WaterResistant</span>
-                </li>
-                <li>
-                    <span class="specification">Макс. разрешение видео: </span><span class="spec">@Model.MaxVideoResolution</span>
-                </li>
-                <li>
-                    <span class="specification">Макс. частота кадров видео: </span><span class="spec">@Model.MaxFPSVideo</span>
-                </li>
-                <li>
-                    <span class="specification">Разъём для наушников: </span><span class="spec">@Model.MiniJack</span>
-                </li>
-                <li>
-                    <span class="specification">Емкость аккумулятора: </span><span class="spec">@Model.BatteryCapacity</span>
-                </li>
-                <li>
-                    <span class="specification">Датчики: </span><span class="spec">@Model.Sensors</span>
-                </li>
-                <li>
-                    <span class="specification">Комплектация: </span><span class="spec">@Model.Equipment</span>
-                </li>
-
-
-
-
-            </ul>
+                    @if (!(Model.Category.Contains("Mac")))
+                    {
+                        <li>
+                            <span class="specification">Камера: </span><span class="spec">@Model.CameraResolution</span>
+                        </li>
+                    }
+                    <li>
+                        <span class="specification">Габариты: </span><span class="spec">@Model.Measurements</span>
+                    </li>
+                    @if (!(Model.Category.Contains("Mac")))
+                    {
+                        <li>
+                            <span class="specification">PPI: </span><span class="spec">@Model.PixelsPerInch</span>
+                        </li>
+                    }
+                    <li>
+                        <span class="specification">Вес: </span><span class="spec">@Model.Weight</span>
+                    </li>
+                    <li>
+                        <span class="specification">Материал корпуса: </span><span class="spec">@Model.Material</span>
+                    </li>
+                    @if (!(Model.Category.Contains("Mac")))
+                    {
+                        <li>
+                            <span class="specification">Тип симкарты: </span><span class="spec">@Model.SIMType</span>
+                        </li>
+                    }
+                    @if (!(Model.Category.Contains("Mac")))
+                    {
+                        <li>
+                            <span class="specification">Наличие влагозащиты: </span><span class="spec">@Model.WaterResistant</span>
+                        </li>
+                        <li>
+                            <span class="specification">Макс. разрешение видео: </span><span class="spec">@Model.MaxVideoResolution</span>
+                        </li>
+                        <li>
+                            <span class="specification">Макс. частота кадров видео: </span><span class="spec">@Model.MaxFPSVideo</span>
+                        </li>
+                    }
+                    @if (!(Model.Category.Contains("Mac")))
+                    {
+                        <li>
+                            <span class="specification">Разъём для наушников: </span><span class="spec">@Model.MiniJack</span>
+                        </li>
+                    }
+                    @if (!(Model.Category.Contains("Mac")))
+                    {
+                        <li>
+                            <span class="specification">Емкость аккумулятора: </span><span class="spec">@Model.BatteryCapacity</span>
+                        </li>
+                    }
+                    @if (!(Model.Category.Contains("Mac")))
+                    {
+                        <li>
+                            <span class="specification">Датчики: </span><span class="spec">@Model.Sensors</span>
+                        </li>
+                    }
+                    <li>
+                        <span class="specification">Комплектация: </span><span class="spec">@Model.Equipment</span>
+                    </li>
+                </ul>
+            </div>
         </div>
-
-
-    </dl>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Back to List", "List")
-</p>

@@ -29,7 +29,18 @@ namespace AppleStore.Domain.Entities
                 line.Quantity += quantity;
             }
         }
+        public int ItemsCount()
+        {
+            return lineCollection.Sum(e => e.Quantity);
+        }
 
+        public void RemoveOne(Gadget gadget)
+        {
+            var cartline = lineCollection.FirstOrDefault(l => l.Gadget.GadgetId == gadget.GadgetId);
+            --cartline.Quantity;
+            if (cartline.Quantity == 0)
+                lineCollection.Remove(cartline);
+        }
         public void RemoveLine(Gadget gadget)
         {
             lineCollection.RemoveAll(l => l.Gadget.GadgetId == gadget.GadgetId);
@@ -44,7 +55,11 @@ namespace AppleStore.Domain.Entities
         {
             lineCollection.Clear();
         }
-
+        public bool HaveInCart(int gadgetId)
+        {
+            var cartline = lineCollection.Find(l => l.Gadget.GadgetId == gadgetId);
+            return cartline != null;
+        }
         public IEnumerable<CartLine> Lines
         {
             get { return lineCollection; }

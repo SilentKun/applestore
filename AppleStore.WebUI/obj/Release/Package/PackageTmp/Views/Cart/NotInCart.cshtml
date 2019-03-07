@@ -1,0 +1,12 @@
+﻿@model AppleStore.Domain.Entities.Gadget
+
+@using (Html.BeginForm("AddToCart", "Cart", FormMethod.Get, new { @class = "basket-details" }))
+{
+    @Html.HiddenFor(x => Model.GadgetId)
+    @Html.Hidden("returnUrl", Request.Url)
+  
+   
+         <button class="btn btn-outline-dark my-2 my-sm-0 "   type="submit">В корзину</button>
+   
+
+}

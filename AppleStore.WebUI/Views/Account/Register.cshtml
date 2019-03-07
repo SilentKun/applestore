@@ -3,51 +3,38 @@
 @{
     ViewBag.Title = "Register";
 }
+<div class="container">
+    <h2  class="title-h31">Регистрация</h2>
 
-<h2>Регистрация</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+       
+        <ul id="auth">
+            @Html.ValidationSummary()
+            <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+            <li>
+                <label>Email</label><br />
+                @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+            </li>
+            <li>
+                <label>Ваше имя</label><br />
+                @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+            </li>
+            <li>
+                <label>Пароль</label><br />
+                @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @type = "password" })
+            </li>
+            <li>
+                <label>Подтвердите пароль</label><br />
+                @Html.TextBoxFor(x => x.PasswordConfirm, new { @class = "form-control", @type = "password" })
+            </li>
+            <p><button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Зарегистрировать</button></p>
+        </ul>
 
-    <div>
-        <h4>Регистрация пользователя</h4>
-        <hr />
-        @Html.ValidationSummary(false)
+    }</div>
 
-        <div>
-            Электронный адрес
-            <div>
-                @Html.EditorFor(model => model.Email)
-            </div>
-        </div>
 
-        <div>
-            Ваше имя
-            <div>
-                @Html.EditorFor(model => model.Name)
-            </div>
-        </div>
-
-        <div>
-            Пароль
-            <div>
-                @Html.EditorFor(model => model.Password)
-            </div>
-        </div>
-
-        <div>
-            Подтвердить пароль
-            <div>
-                @Html.EditorFor(model => model.PasswordConfirm)
-            </div>
-        </div>
-
-        <div>
-            <div>
-                <input type="submit" value="Зарегистрировать" />
-            </div>
-        </div>
-    </div>
-}

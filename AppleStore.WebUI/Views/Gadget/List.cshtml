@@ -1,17 +1,59 @@
 ﻿@using AppleStore.WebUI.Models
-@using AppleStore.WebUI.HtmlHelpers
+
 @model GadgetsListViewModel
 
 @{
-    ViewBag.Title = "Товары";
+    ViewBag.Title = "AppleStore";
 }
 
-@foreach (var p in @Model.Gadgets)
-{
-    @Html.Partial("GadgetSummary", p)
-}
+<section>
+    <div class="container">
+        <div class="gadgets">
+            <ul id="scrolList">
+                @Html.Partial("DisplayGadgets")
+            </ul>
+        </div>
+    </div>
+</section>
 
-<div class="btn-group pull-right">
-    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List",
-        new { page = x, category = Model.CurrentCategory }))
-</div>
+
+
+<script type="text/javascript">
+    $(function () {
+
+
+        var page = 1;
+        var str = '';
+        var _inCallback = false;
+        function loadItems() {
+            if (page > -1 && !_inCallback) {
+                _inCallback = true;
+                page++;
+                if ('@Model.CurrentCategory' == '')
+                    str = '/Page/' + page;
+                else {
+                    str = '@Model.CurrentCategory' + '/Page/' + page;
+                }
+                $.ajax({
+                    type: 'GET',
+                    url:  str,
+                    success: function (data, textstatus) {
+                        if (data != '') {
+                            $("#scrolList").append(data);
+                        }
+                        else {
+                            page = -1;
+                        }
+                        _inCallback = false;
+                    }
+                });
+            }
+        }
+        $(window).scroll(function () {
+            if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+                loadItems();
+            }
+        });
+    })
+</script>
+

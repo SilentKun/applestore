@@ -3,28 +3,28 @@
 @{
     ViewBag.Title = "Login";
 }
+<div class="container">
+    <h3 class="title-h31">Вход на сайт</h3>
 
-<h2>Вход на сайт</h2>
 
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+        <ul id="auth">
+            @Html.ValidationSummary()
+            <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+        <li>
+                <label>Email</label><br />
+            @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+        </li>
+        <li>
+                <label>Пароль</label><br />
+        @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @type = "password"})
+        </li>
+            <p><button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Войти</button></p>
+        </ul>
+    }
+</div>
 
-    <div>
-        @Html.ValidationSummary()
-        <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
-        <p>
-            <label>Email</label><br />
-            @Html.EditorFor(x => x.Email)
-        </p>
-        <p>
-            <label>Пароль</label><br />
-            @Html.EditorFor(x => x.Password)
-        </p>
-        <p><button type="submit">Войти</button></p>
-    </div>
-    <div>
-        <a href='@Url.Action("Register", "Account")'>Регистрация</a>
-    </div>
-}
+   

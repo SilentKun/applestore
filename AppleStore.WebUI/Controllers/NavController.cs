@@ -22,11 +22,10 @@ namespace AppleStore.WebUI.Controllers
             ViewBag.SelectedCategory = category;
 
             IEnumerable<string> categories = repository.Gadgets
-                .Select(game => game.Category)
+                .Select(art => art.Category)
                 .Distinct()
                 .OrderBy(x => x);
-
-            return PartialView("FlexMenu", categories);
+            return PartialView(categories);
         }
     }
 }

@@ -3,9 +3,11 @@
 @{
     ViewBag.Title = "AppleStore: форма заказа";
 }
-
-<h2>Оформить заказ сейчас</h2>
-<p>Пожалуйста введи ваши контактные данные, и мы сразу отправим товар!</p>
+<div class="container">
+    <h2 class="title-h1">Оформить заказ сейчас</h2>
+    <div class="title-h4">
+        <p class="">Пожалуйста введите ваши контактные данные, и мы сразу отправим товар!</p>
+    </div>
 
 
 @using (Html.BeginForm())
@@ -33,8 +35,8 @@
     </ul>
 
 
-    <h3>Опции</h3>
-    <div class="checkbox">
+    <h3 class="title-h1">Опции</h3>
+    <div class="title-h4">
         <label>
             @Html.EditorFor(x => x.GiftWrap)
             Использовать подарочную упаковку?
@@ -42,6 +44,7 @@
     </div>
 
     <div class="text-center">
-        <input class="btn btn-primary" type="submit" value="Обработать заказ" />
+        <input class="btn btn-outline-dark my-2 my-sm-0" type="submit" value="Обработать заказ" />
     </div>
 }
+</div>

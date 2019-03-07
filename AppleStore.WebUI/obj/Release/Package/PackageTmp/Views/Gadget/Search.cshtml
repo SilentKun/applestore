@@ -3,14 +3,14 @@
 @model GadgetsListViewModel
 
 @{
-    ViewBag.Title = "Apple Store";
+    ViewBag.Title = "AppleStore";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <section>
     <div>
         <div class="container">
-            <div class="portfolio" id="scrolList">
+            <div class="gadgets" id="scrolList">
                 <ul>
                     @Html.Partial("DisplayGadgets")
                 </ul>
@@ -49,12 +49,7 @@
                 });
             }
         }
-        $(window).scroll(function () {
-            if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-                loadItems();
-            }
-        });
+
     })
 </script>
-
 

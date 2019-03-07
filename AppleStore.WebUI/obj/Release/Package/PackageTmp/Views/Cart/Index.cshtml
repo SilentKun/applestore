@@ -1,65 +1,95 @@
 ﻿@model AppleStore.WebUI.Models.CartIndexViewModel
 
 @{
-    ViewBag.Title = "AppleStore: ваша корзина";
+    ViewBag.Title = "Apple Store: ваша корзина";
 }
-<style>
-    #cartTable td {
-        vertical-align: middle;
-    }
-</style>
-<h2>Ваша корзина</h2>
-<table id="cartTable" class="table">
-    <thead>
-        <tr>
-            <th>Кол-во</th>
-            <th>Гаджет</th>
-            <th class="text-right">Цена</th>
-            <th class="text-right">Общая цена</th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="container">
+    <div class="result-menu">
+        <div id="Result">Итого</div>
+        <div class="count-products">
+            <p>Товаров в корзине: <span>#@Model.Cart.ItemsCount()</span></p>
+        </div>
+        @if (Model.Cart.ItemsCount() != 0)
+        {
+            <div class="count-money">
+                <p>На сумму: <span>@Model.Cart.ComputeTotalValue().ToString("# руб")</span></p>
+            </div>
+        }
+        
+
+    </div>
+    <div id="header-list-cart">
+        <div id="head1">Изображение</div>
+        <div id="head2">Наименование</div>
+        <div id="head3">Количество</div>
+        <div id="head4">Цена</div>
+    </div>
+
     @foreach (var line in Model.Cart.Lines)
     {
-        <tr>
-            <td class="text-center">@line.Quantity</td>
-            <td class="text-left">@line.Gadget.Name</td>
-            <td class="text-right">@line.Gadget.Price.ToString("# руб")</td>
-            <td class="text-right">
-                @((line.Quantity * line.Gadget.Price).ToString("# руб"))
-            </td>
-            <td>
+        <div class="block-list-cart">
+
+            <div class="img-cart">
+                <p class="ImgForBasket"> <img src="@Url.Action("GetImage", "Gadget", new { line.Gadget.GadgetId })" alt="" class="picInBasket"></p>
+            </div>
+            <div class="title-cart">
+                <p> <a href="/Gadget/Details?gadgetId=@line.Gadget.GadgetId">@line.Gadget.Name</a> </p>
+                
+            </div>
+            <div class="count-cart">
+                <ul class="input-count-style">
+                    <li>
+                        @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                            @Html.Hidden("GadgetId", line.Gadget.GadgetId)
+                            @Html.HiddenFor(x => x.ReturnUrl)
+                            <button class="count-plus">+</button>
+                        }
+                    </li>
+                    <li>
+                        <input class="count-input" type="text" placeholder="0" maxlenght="3" value="@line.Quantity">
+                    </li>
+                    <li>
+                        @using (Html.BeginForm("RemoveOne", "Cart"))
+                        {
+                            @Html.Hidden("GadgetId", line.Gadget.GadgetId)
+                            @Html.HiddenFor(x => x.ReturnUrl)
+                            <button class="count-minus">-</button>
+                        }
+                    </li>
+                </ul>
+            </div>
+
+            <div class="price-product">
+                <h5>@line.Gadget.Price.ToString("# руб")</h5> <p></p>
+            </div>
+            <div class="delete-cart">
                 @using (Html.BeginForm("RemoveFromCart", "Cart"))
                 {
                     @Html.Hidden("GadgetId", line.Gadget.GadgetId)
                     @Html.HiddenFor(x => x.ReturnUrl)
-                    <input class="btn btn-sm btn-warning" type="submit" value="Удалить" />
+                    <input type="image" src="~/image/trash-alt-solid.svg" name="submit">
+                    
                 }
-            </td>
-        </tr>
-    }
-    </tbody>
-    <tfoot>
-        <tr>
-            <td colspan="3" class="text-right">Итого:</td>
-            <td class="text-right">
-                @Model.Cart.ComputeTotalValue().ToString("# руб")
-            </td>
-        </tr>
-    </tfoot>
-</table>
+            </div>
+          
+            <div id="bottom-cart-line">
 
-<div class="text-center">
-    <a class="btn btn-primary" href="@Model.ReturnUrl">Продолжить покупки</a>
-    @if (@HttpContext.Current.User.Identity.IsAuthenticated)
-    {
-        @Html.ActionLink("Оформить заказ", "Checkout", null, new { @class = "btn btn-primary" })
-    }
-@if (!@HttpContext.Current.User.Identity.IsAuthenticated)
-{
-    <div>
-       <a href='@Url.Action("Login", "Account")'>Чтобы оформить заказ авторизируйтесь!</a>
-    </div>
-        }
+            </div>
+        </div>
 
+    }
+
+        <div class="btn-cart">
+            <a class="btn btn-outline-dark my-2 my-sm-0" href="@Model.ReturnUrl">Продолжить покупки</a>
+            @if (@HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink("Оформить заказ", "Checkout", null, new { @type = "buttonNext", @class = "btn btn-outline-dark my-2 my-sm-0" })
+            }
+            @if (!@HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                <a class="btn btn-outline-dark my-2 my-sm-0" href='@Url.Action("Login", "Account")'>Чтобы оформить заказ авторизируйтесь!</a>
+            }
+        </div>
 </div>
+

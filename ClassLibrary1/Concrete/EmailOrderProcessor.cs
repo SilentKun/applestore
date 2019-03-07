@@ -56,10 +56,10 @@ namespace AppleStore.Domain.Concrete
                 foreach (var line in cart.Lines)
                 {
                     var subtotal = line.Gadget.Price * line.Quantity;
-                    body.AppendFormat("{0} x {1} (Всего: {2:c})\r\n", line.Quantity, line.Gadget.Name, subtotal);
+                    body.AppendFormat("{0} x {1} (Всего: {2:n}₽)\r\n", line.Quantity, line.Gadget.Name, subtotal);
                 }
 
-                body.AppendFormat("Общая стоимость: {0:c}", cart.ComputeTotalValue())
+                body.AppendFormat("Общая стоимость: {0:n}₽", cart.ComputeTotalValue())
                     .AppendLine()
                     .AppendLine("Заказчик:")
                     .AppendLine(shippingInfo.Name)

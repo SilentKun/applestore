@@ -1,7 +1,7 @@
 ﻿@using AppleStore.WebUI.Models
 @model GadgetsListViewModel
 
-@foreach (var art in @Model.Gadgets)
+@foreach (var gadget in @Model.Gadgets)
 {
-    @Html.Partial("GadgetSummary", art)
+    @Html.Partial("GadgetSummary", gadget)
 }

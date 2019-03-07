@@ -18,7 +18,22 @@ namespace AppleStore.WebUI.Controllers
             repository = repo;
             orderProcessor = processor;
         }
+        public RedirectToRouteResult RemoveOne(Cart cart, int gadgetId, string returnUrl)
+        {
+            var art = repository.Gadgets.FirstOrDefault(g => g.GadgetId == gadgetId);
 
+            if (art != null)
+            {
+                cart.RemoveOne(art);
+            }
+
+            return RedirectToAction("Index", new { returnUrl });
+        }
+        public ActionResult HaveGadgetInCart(Cart cart, int gadgetId)
+        {
+            string viewname = cart.HaveInCart(gadgetId) ? "HaveInCart" : "NotInCart";
+            return PartialView(viewname);
+        }
         public ViewResult Checkout()
         {
             return View(new ShippingDetails());

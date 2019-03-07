@@ -1,19 +1,112 @@
-﻿@model IEnumerable<string>
+﻿
+<nav class="navbar navbar-expand-lg sticky-top navbar-dark ">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-@Html.ActionLink("Домой", "List", "Gadget", null,
-    new { @class = "btn btn-block btn-default btn-lg" })
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-@foreach (var link in Model)
+            <ul class="navbar-nav mr-auto">
+
+
+
+
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        iPhone
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/iPhone%20XS%20Max">iPhone XS Max</a>
+                        <a class="dropdown-item" href="/iPhone%20XS">iPhone XS</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/iPhone%20XR">iPhone XR</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/iPhone%20X">iPhone X</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/iPhone%208%20Plus">iPhone 8 Plus</a>
+                        <a class="dropdown-item" href="/iPhone%208">iPhone 8</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/iPhone%207%20Plus">iPhone 7 Plus</a>
+                        <a class="dropdown-item" href="/iPhone%207">iPhone 7</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/iPhone%206S%20Plus">iPhone 6S Plus</a>
+                        <a class="dropdown-item" href="/iPhone%206S">iPhone 6S</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/iPhone%206">iPhone 6</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/iPhone%20SE">iPhone SE</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        iPad
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/iPad%20Pro%2012%2c9%20(2018)">iPad Pro 12.9" (2018)</a>
+                        <a class="dropdown-item" href="/iPad%20Pro%2011%20(2018)">iPad Pro 11" (2018)</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/iPad%20Pro%2012%2c9%20(2017)">iPad Pro 12.9" (2017)</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/iPad%20Pro%2010%2c5">iPad Pro 10.5"</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/iPad%202018">iPad 2018</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/iPad%202017">iPad 2017</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/iPad%20Mini%204">iPad Mini 4</a>
+
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Mac
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/MacBook%20Pro%2015%20(2018)">MacBook Pro 15 (2018)</a>
+                        <a class="dropdown-item" href="/MacBook%20Pro%2013%20(2018)">MacBook Pro 13 (2018)</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/MacBook%20Pro%2015%20(2017)">MacBook Pro 15 (2017)</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/MacBook%20Pro%2013%20(2017)">MacBook Pro 13 (2017)</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/MacBook%20Pro%2015%20(2016)">MacBook Pro 15 (2016)</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/MacBook%20Pro%2013%20(2016)">MacBook Pro 13 (2016)</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/MacBook%2012%20(2017)">MacBook 12 (2017)</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/MacBook%20Air%2013%20(2018)">MacBook Air 13 (2018)</a>
+                        <a class="dropdown-item" href="/MacBook%20Air%2013">MacBook Air 13</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/MacBook%20Pro%20(2015)">MacBook Pro (2015)</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/Mac%20mini%20(2018)">Mac mini (2018)</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/iMac">iMac</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/Mac%20Pro">Mac Pro</a>
+                    </div>
+                </li>
+               
+
+            </ul>
+            @Html.Action("Summary", "Cart")
+            @using (Html.BeginForm("Search", "Gadget", FormMethod.Get, new { @class = "form-inline my-2 my-lg-0", @id = "SearchButton" }))
+            {
+                @Html.TextBox("target", ViewData["target"], htmlAttributes: new { @class = "form-control mr-sm-2", @type = "search", placeholder = "iPhone" })
+                <button class="btn btn-outline-light my-2 my-sm-0 standart" type="submit">Поиск</button>
+            }
+            
+        </div>
+    </div>
+
+</nav>
+
+
+@*@using (Html.BeginForm("Search", "Gadget", FormMethod.Get, new { @class = "form-inline my-2 my-lg-0", @id = "SearchButton" }))
 {
-    @Html.RouteLink(link, new
-    {
-        controller = "Gadget",
-        action = "List",
-        category = link,
-        page = 1
-    }, new
-    {
-        @class = "btn btn-block btn-default btn-lg"
-                 + (link == ViewBag.SelectedCategory ? " btn-primary" : "")
-    })
-}
+    @Html.TextBox("target", ViewData["target"], htmlAttributes: new { @class = "form-control mr-sm-2", @type = "search", placeholder = "Поиск" })
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
+}*@
