@@ -12,10 +12,10 @@
         </div>
         foreach (var line in Model)
         {
-            <div class="block-list-cart">
+            <div class="cartstyles">
 
                 <div class="img-cart">
-                    <p class="ImgForBasket"> <img src="@Url.Action("GetImage", "Gadget", new { line.GadgetId })" alt="" class="picInBasket"></p>
+                    <p > <img src="@Url.Action("GetImage", "Gadget", new { line.GadgetId })" alt="" class="picInBasket"></p>
                 </div>
                 <div class="title-cart">
                     <p> <a href="/Gadget/Details?gadgetId=@line.GadgetId">@line.Name</a> </p>

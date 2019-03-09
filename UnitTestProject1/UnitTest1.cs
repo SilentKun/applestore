@@ -167,7 +167,7 @@ namespace UnitTestProject1
             Assert.AreEqual(categoryToSelect, result);
         }
         [TestMethod]
-        public void Generate_Category_Specific_Game_Count()
+        public void Generate_Category_Specific_Gadget_Count()
         {
             /// Организация (arrange)
             Mock<IGadgetRepository> mock = new Mock<IGadgetRepository>();

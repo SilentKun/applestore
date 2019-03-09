@@ -128,7 +128,7 @@ namespace AppleStore.UnitTests
         /// После добавления игры в корзину, должно быть перенаправление на страницу корзины
         /// </summary>
         [TestMethod]
-        public void Adding_Game_To_Cart_Goes_To_Cart_Screen()
+        public void Adding_Gadget_To_Cart_Goes_To_Cart_Screen()
         {
             // Организация - создание имитированного хранилища
             Mock<IGadgetRepository> mock = new Mock<IGadgetRepository>();

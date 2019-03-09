@@ -15,8 +15,6 @@ namespace AppleStore.Domain.Concrete
         public string Password = "1237654cxz";
         public string ServerName = "smtp.yandex.ru";
         public int ServerPort = 25;
-        public bool WriteAsFile = false;
-        public string FileLocation = @"c:\apple_store_emails";
     }
 
     public class EmailOrderProcessor : IOrderProcessor
@@ -40,13 +38,6 @@ namespace AppleStore.Domain.Concrete
                 smtpClient.Credentials
                     = new NetworkCredential(emailSettings.Username, emailSettings.Password);
 
-                if (emailSettings.WriteAsFile)
-                {
-                    smtpClient.DeliveryMethod
-                        = SmtpDeliveryMethod.SpecifiedPickupDirectory;
-                    smtpClient.PickupDirectoryLocation = emailSettings.FileLocation;
-                    smtpClient.EnableSsl = false;
-                }
 
                 StringBuilder body = new StringBuilder()
                     .AppendLine("Новый заказ обработан")
@@ -76,11 +67,6 @@ namespace AppleStore.Domain.Concrete
                                        "Новый заказ",
                                        body.ToString());
 
-                if (emailSettings.WriteAsFile)
-                {
-                    mailMessage.BodyEncoding = Encoding.UTF8;
-                    mailMessage.HeadersEncoding = Encoding.UTF8;
-                }
 
                 smtpClient.Send(mailMessage);
             }

@@ -13,6 +13,12 @@
                 @Html.Partial("DisplayGadgets")
             </ul>
         </div>
+        @if ((Request.Url.PathAndQuery.IndexOf("iPhone") >= 0) || (Request.Url.PathAndQuery.IndexOf("Mac") >= 0)||(Request.Url.PathAndQuery.IndexOf("iPad") >= 0))
+        {
+            <div class="pages">
+                @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new {page = x}))
+            </div>
+        }
     </div>
 </section>
 

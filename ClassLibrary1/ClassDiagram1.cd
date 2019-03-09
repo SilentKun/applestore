@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="AppleStore.Domain.Concrete.EFDbContext">
+    <Position X="14.25" Y="1.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAIAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Concrete\EFDbContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AppleStore.Domain.Concrete.EFGadgetRepository" BaseTypeListCollapsed="true">
+    <Position X="9" Y="1" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAECAAAAAAAAAAAAIAAAAAAAAAAAABAAAAAAIAAAAAA=</HashCode>
+      <FileName>Concrete\EFGadgetRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AppleStore.Domain.Concrete.EmailSettings">
+    <Position X="12" Y="1" Width="2" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAACAAQBAQAAAAAAAAAACgAAAAAAAAAA=</HashCode>
+      <FileName>Concrete\EmailOrderProcessor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AppleStore.Domain.Concrete.EmailOrderProcessor" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="0.5" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAI=</HashCode>
+      <FileName>Concrete\EmailOrderProcessor.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AppleStore.Domain.Entities.Cart">
+    <Position X="8.75" Y="3.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAEAgAAIAAAAAAgAAAAAACAAAAAABGAAA=</HashCode>
+      <FileName>Entities\Cart.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AppleStore.Domain.Entities.CartLine">
+    <Position X="13.75" Y="4" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAAA=</HashCode>
+      <FileName>Entities\Cart.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AppleStore.Domain.Entities.Gadget">
+    <Position X="4" Y="1.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>CEAgBAICAQAAAgAAAkABAASABCEgEAAIAAEQAABACQA=</HashCode>
+      <FileName>Entities\Gadget.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AppleStore.Domain.Entities.Image">
+    <Position X="7" Y="1.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAEIAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Image.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AppleStore.Domain.Entities.Order">
+    <Position X="1" Y="2.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAAAAAAAgAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Order.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AppleStore.Domain.Entities.ShippingDetails">
+    <Position X="16.5" Y="3.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAACAAAAQAAAAAAAAAAEAAIAAAAAA=</HashCode>
+      <FileName>Entities\ShippingDetails.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="AppleStore.Domain.Abstract.IGadgetRepository">
+    <Position X="0.5" Y="3.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAIAAAAAAAAAAAABAAAAAAIAAAAAA=</HashCode>
+      <FileName>Abstract\IGadgetRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AppleStore.Domain.Abstract.IOrderProcessor">
+    <Position X="6.75" Y="4" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Abstract\IOrderProcessor.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

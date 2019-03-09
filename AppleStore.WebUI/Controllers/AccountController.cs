@@ -96,14 +96,5 @@ namespace AppleStore.WebUI.Controllers
             AuthenticationManager.SignOut();
             return RedirectToAction("Login");
         }
-        //[Authorize]
-        //public string MyName()
-        //{
-
-        //    ApplicationUserManager userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-        //    ApplicationUser user = userManager.FindByEmail(User.Identity.Name);
-        //    string name = user.Email.ToString();
-        //    return name;
-        //}
     }
 }

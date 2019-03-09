@@ -27,7 +27,7 @@
 
     @foreach (var line in Model.Cart.Lines)
     {
-        <div class="block-list-cart">
+        <div class="cartstyles">
 
             <div class="img-cart">
                 <p class="ImgForBasket"> <img src="@Url.Action("GetImage", "Gadget", new { line.Gadget.GadgetId })" alt="" class="picInBasket"></p>

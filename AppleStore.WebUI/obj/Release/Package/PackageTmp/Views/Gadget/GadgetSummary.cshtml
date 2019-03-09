@@ -3,9 +3,9 @@
     <li>
 
        
-            <img class="imgOnMainPage" src="@Url.Action("GetImage", "Gadget", new {Model.GadgetId})">
+            <img class="pictureMainp" src="@Url.Action("GetImage", "Gadget", new {Model.GadgetId})">
         
-        @Html.ActionLink("Подробнее", "Details", new { gadgetId = Model.GadgetId }, new { @class = "MoreAbout" })
+        @Html.ActionLink("Подробнее", "Details", new { gadgetId = Model.GadgetId }, new { @class = "More" })
 
         <div class="descr">«@Model.Name»</div> <br>
         <span class="price">@Model.Price.ToString("# руб")</span>

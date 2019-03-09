@@ -52,8 +52,6 @@ namespace AppleStore.WebUI.Controllers
                 foreach (var item in cart.Lines)
                 {
                     repository.SaveOrder(new Order { UserID = User.Identity.GetUserId(), GadgetID = item.Gadget.GadgetId });
-                    //    (repository.Orders as DbSet<Order>)
-                    //        .Add(new Order { UserID = User.Identity.GetUserId(), GadgetID = item.Gadget.GadgetId });
                 }
 
             orderProcessor.ProcessOrder(cart, shippingDetails);

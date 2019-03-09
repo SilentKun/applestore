@@ -21,10 +21,10 @@ namespace AppleStore.WebUI.Controllers
             var list = new List<Gadget>();
             var res = repository.Orders
                 .Where(g => g.UserID == User.Identity.GetUserId());
-            foreach (var item228 in res)
+            foreach (var itemz in res)
             {
-                var итем = repository.Gadgets.First(g => g.GadgetId == item228.GadgetID);
-                list.Add(итем);
+                var item = repository.Gadgets.First(g => g.GadgetId == itemz.GadgetID);
+                list.Add(item);
             }
 
             return View(list);

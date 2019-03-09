@@ -9,10 +9,6 @@
 
             <ul class="navbar-nav mr-auto">
 
-
-
-
-
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         iPhone
@@ -87,6 +83,8 @@
                         <a class="dropdown-item" href="/iMac">iMac</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/Mac%20Pro">Mac Pro</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/iMac%20Pro">iMac Pro</a>
                     </div>
                 </li>
                
@@ -103,10 +101,3 @@
     </div>
 
 </nav>
-
-
-@*@using (Html.BeginForm("Search", "Gadget", FormMethod.Get, new { @class = "form-inline my-2 my-lg-0", @id = "SearchButton" }))
-{
-    @Html.TextBox("target", ViewData["target"], htmlAttributes: new { @class = "form-control mr-sm-2", @type = "search", placeholder = "Поиск" })
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
-}*@

@@ -22,7 +22,7 @@ namespace AppleStore.WebUI.Controllers
             ViewBag.SelectedCategory = category;
 
             IEnumerable<string> categories = repository.Gadgets
-                .Select(art => art.Category)
+                .Select(gadget => gadget.Category)
                 .Distinct()
                 .OrderBy(x => x);
             return PartialView(categories);
