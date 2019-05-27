@@ -1,9 +1,6 @@
 ﻿@model AppleStore.Domain.Entities.Gadget
-
-@using AppleStore.WebUI.HtmlHelpers
-
 @{
-    ViewBag.Title = "Apple Store";
+    ViewBag.Title = "iGadget Store";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container">
@@ -15,23 +12,36 @@
             <h3 class="Name">«@Model.Name»</h3>
             <div class="Specifications">
                 <ul>
+                    @if (Model.Casing.MaterialId.HasValue)
+                    {
+                        <li>
+                            <span class="specification">Материал корпуса: </span><span class="spec">@Model.Casing.Material.Title</span>
+                        </li>
+                    }
                     <li>
-                        <span class="specification">Материал корпуса: </span><span class="spec">@Model.Material</span>
+                        <span class="specification">Разработчик: </span> <span class="spec">@Model.Company.Title</span>
                     </li>
                     <li>
-                        <span class="specification">Процессор: </span><span class="spec">@Model.CPU</span>
+                        <span class="specification">Операционная система: </span> <span class="spec">@Model.OperatingSystem.Title</span>
                     </li>
                     <li>
-                        <span class="specification">Количество оперативной памяти: </span><span class="spec">@Model.RAM</span>
+                        <span class="specification">Процессор: </span><span class="spec">@Model.CPU.Title</span>
                     </li>
                     <li>
-                        <span class="specification">Разрешение экрана: </span><span class="spec">@Model.Resolution</span>
+                        <span class="specification">Количество оперативной памяти: </span><span class="spec">@Model.RAM.ToString("# Гбайт")</span>
                     </li>
+                    @if (Model.DisplayId.HasValue && Model.Display.ResolutionH.HasValue && Model.Display.ResolutionW.HasValue)
+                    {
+                        <li>
+                            <span class="specification">Разрешение экрана: </span><span class="spec">@Model.Display.ResolutionW x @Model.Display.ResolutionH</span>
+                        </li>
+                    }
                 </ul>
             </div>
             <h1 class="Price" style="margin-bottom: -15px;">@Model.Price.ToString("# руб")</h1>
             <div class="button-cart">
-                 @Html.Action("HaveGadgetInCart", "Cart", new { gadgetid = Model.GadgetId })</div>
+                @Html.Action("HaveGadgetInCart", "Cart", new { gadgetid = Model.GadgetId })
+            </div>
         </div>
 
         <div class="Description">
@@ -39,83 +49,95 @@
                 <br>
                 <h5>Подробные характеристики</h5>
                 <ul>
-                    <li>
-                        <span class="specification">Операционная система: </span> <span class="spec">@Model.OperatingSystem</span>
-                    </li>
-
-                    <li>
-                        <span class="specification">Диагональ экрана: </span><span class="spec">@Model.Diagonal</span>
-                    </li>
-                    <li>
-                        <span class="specification">Соотношение сторон: </span><span class="spec">@Model.AspectRatio</span>
-                    </li>
-                    <li>
-                        <span class="specification">Тип экрана: </span><span class="spec">@Model.DisplayTechnology</span>
-                    </li>
-                    <li>
-                        <span class="specification">Количество памяти: </span><span class="spec">@Model.ROM</span>
-                    </li>
-
-                    @if (!(Model.Category.Contains("Mac")))
+                    @if (Model.DisplayId.HasValue)
+                    {
+                    if (Model.Display.Diagonal.HasValue)
                     {
                         <li>
-                            <span class="specification">Камера: </span><span class="spec">@Model.CameraResolution</span>
+                            <span class="specification">Диагональ экрана: </span><span class="spec">@Model.Display.Diagonal</span>
+                        </li>
+                    }
+                    if (Model.Display.AspectRatioW.HasValue || Model.Display.AspectRatioH.HasValue)
+                    {
+                        <li>
+                            <span class="specification">Соотношение сторон: </span><span class="spec">
+                                @string.Format("{0}:{1}",
+                           Model.Display.AspectRatioW,
+                           Model.Display.AspectRatioH)
+                            </span>
+                        </li>
+                    }
+                    if (Model.Display.DisplayTechnologyId.HasValue)
+                    {
+                        <li>
+                            <span class="specification">Тип экрана: </span><span class="spec">@Model.Display.DisplayTechnology.Title</span>
+                        </li>
+                    }
+                    }
+                    <li>
+                        <span class="specification">Количество памяти: </span><span class="spec">@Model.ROM.ToString("# Гбайт")</span>
+                    </li>
+
+                    @if (Model.CameraId.HasValue)
+                    {
+                        <li>
+                            <span class="specification">Камера: </span><span class="spec">@Model.Camera.CameraResolution.ToString("# МП")</span>
+                        </li>
+                        <li>
+                            <span class="specification">Макс. разрешение видео: </span><span class="spec">@Model.Camera.VidResolutionW x @Model.Camera.VidResolutionH</span>
+                        </li>
+                    }
+
+                    <li>
+                        <span class="specification">Габариты: </span><span class="spec">@string.Format("{1}x{0}x{2}", Model.Casing.Width, Model.Casing.Height, Model.Casing.Thickness)</span>
+                    </li>
+
+                    @if (Model.Display.PPI.HasValue)
+                    {
+                        <li>
+                            <span class="specification">PPI: </span><span class="spec">@Model.Display.PPI</span>
                         </li>
                     }
                     <li>
-                        <span class="specification">Габариты: </span><span class="spec">@Model.Measurements</span>
+                        <span class="specification">Вес: </span><span class="spec">@Model.Casing.Weight.ToString("# г.")</span>
                     </li>
-                    @if (!(Model.Category.Contains("Mac")))
-                    {
-                        <li>
-                            <span class="specification">PPI: </span><span class="spec">@Model.PixelsPerInch</span>
-                        </li>
-                    }
-                    <li>
-                        <span class="specification">Вес: </span><span class="spec">@Model.Weight</span>
-                    </li>
-                    <li>
-                        <span class="specification">Материал корпуса: </span><span class="spec">@Model.Material</span>
-                    </li>
-                    @if (!(Model.Category.Contains("Mac")))
+
+                    @if (!string.IsNullOrEmpty(Model.SIMType))
                     {
                         <li>
                             <span class="specification">Тип симкарты: </span><span class="spec">@Model.SIMType</span>
                         </li>
                     }
-                    @if (!(Model.Category.Contains("Mac")))
+                    @if (Model.Casing.WaterResistantId.HasValue)
                     {
                         <li>
-                            <span class="specification">Наличие влагозащиты: </span><span class="spec">@Model.WaterResistant</span>
-                        </li>
-                        <li>
-                            <span class="specification">Макс. разрешение видео: </span><span class="spec">@Model.MaxVideoResolution</span>
-                        </li>
-                        <li>
-                            <span class="specification">Макс. частота кадров видео: </span><span class="spec">@Model.MaxFPSVideo</span>
+                            <span class="specification">Наличие влагозащиты: </span><span class="spec">@Model.Casing.WaterResistant.Title</span>
                         </li>
                     }
-                    @if (!(Model.Category.Contains("Mac")))
+                    @if (!string.IsNullOrEmpty(Model.MiniJack))
                     {
                         <li>
                             <span class="specification">Разъём для наушников: </span><span class="spec">@Model.MiniJack</span>
                         </li>
                     }
-                    @if (!(Model.Category.Contains("Mac")))
+                    @if (!string.IsNullOrEmpty(Model.BatteryCapacity))
                     {
                         <li>
                             <span class="specification">Емкость аккумулятора: </span><span class="spec">@Model.BatteryCapacity</span>
                         </li>
                     }
-                    @if (!(Model.Category.Contains("Mac")))
+                    @if (!string.IsNullOrEmpty(Model.Sensors))
                     {
                         <li>
                             <span class="specification">Датчики: </span><span class="spec">@Model.Sensors</span>
                         </li>
                     }
-                    <li>
-                        <span class="specification">Комплектация: </span><span class="spec">@Model.Equipment</span>
-                    </li>
+                    @if (!string.IsNullOrEmpty(Model.Equipment))
+                    {
+                        <li>
+                            <span class="specification">Комплектация: </span><span class="spec">@Model.Equipment</span>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>

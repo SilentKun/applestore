@@ -1,7 +1,5 @@
-﻿@using AppleStore.WebUI.Models
-@model GadgetsListViewModel
-
-@foreach (var gadget in @Model.Gadgets)
+﻿@using AppleStore.Domain.Entities
+@foreach (Gadget gadget in ViewBag.Gadgets)
 {
-    @Html.Partial("GadgetSummary", gadget)
+    @Html.Partial("GadgetSummary", gadget);
 }

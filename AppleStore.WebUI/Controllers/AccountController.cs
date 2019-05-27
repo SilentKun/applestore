@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -14,22 +12,8 @@ namespace AppleStore.WebUI.Controllers
 {
     public class AccountController : Controller
     {
-
-
-        private ApplicationUserManager UserManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-        }
-        private IAuthenticationManager AuthenticationManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
-        }
+        private ApplicationUserManager UserManager => HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+        private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
 
         public ActionResult Register()
         {

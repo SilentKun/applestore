@@ -1,10 +1,6 @@
 ﻿@using AppleStore.WebUI.Models
-
-@model GadgetsListViewModel
-
 @{
-    ViewBag.Title = "AppleStore";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "iGadget Store";
 }
 
 <section>
@@ -15,45 +11,11 @@
                     @Html.Partial("DisplayGadgets")
                 </ul>
             </div>
-            <div>
 
+            <div class="pages">
+                @Html.PageLinks((PagingInfo)ViewBag.PagingInfo, x => Url.Action("Search", new { target = ViewBag.SearchValue, page = x }))
             </div>
         </div>
     </div>
-
 </section>
-
-<script type="text/javascript">
-    $(function () {
-        var page = 1;
-        var str = '';
-        var _inCallback = false;
-        function loadItems() {
-            if (page > -1 && !_inCallback) {
-                _inCallback = true;
-                page++;
-                if ('@Model.SearchWord' != '')
-                    str = '/Search?target=' + '@Model.SearchWord' + '&page=' + page;
-                else
-                    return;
-
-                $.ajax({
-                    type: 'GET',
-                    url:  str,
-                    success: function (data, textstatus) {
-                        if (data != '') {
-                            $("#scrolList").append(data);
-                        }
-                        else {
-                            page = -1;
-                        }
-                        _inCallback = false;
-                        //$("div#loading").hide();
-                    }
-                });
-            }
-        }
-
-    })
-</script>
 

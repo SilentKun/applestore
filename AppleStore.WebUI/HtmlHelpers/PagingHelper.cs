@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web;
-using System.Web.Mvc;
-using AppleStore.WebUI.Models;
-
-namespace AppleStore.WebUI.HtmlHelpers
+﻿namespace AppleStore.WebUI.HtmlHelpers
 {
+    using System;
+    using System.Text;
+    using System.Web.Mvc;
+    using AppleStore.WebUI.Models;
+
     public static class PagingHelper
     {
         public static MvcHtmlString PageLinks(this HtmlHelper html,
@@ -15,7 +12,7 @@ namespace AppleStore.WebUI.HtmlHelpers
             Func<int, string> pageUrl)
         {
             StringBuilder result = new StringBuilder();
-            for (int i = 1; i <= pagingInfo.TotalPages; i++)
+            for (int i = 1; i <= pagingInfo.TotalPages; ++i)
             {
                 TagBuilder tag = new TagBuilder("a");
                 tag.MergeAttribute("href", pageUrl(i));

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using AppleStore.Domain.Abstract;
 using AppleStore.Domain.Entities;
@@ -11,8 +8,7 @@ namespace AppleStore.WebUI.Controllers
 {
     public class GadgetController : Controller
     {
-        // GET: Gadget
-        private IGadgetRepository repository;
+        private readonly IGadgetRepository repository;
         public int pageSize = 6;
 
         public GadgetController(IGadgetRepository repo)
@@ -20,56 +16,56 @@ namespace AppleStore.WebUI.Controllers
             repository = repo;
         }
 
-        public ViewResult List(string category, int page = 1)
+        public ViewResult List(int categoryid = 0, int page = 1, bool canshowpageselector = true)
         {
-            GadgetsListViewModel model = new GadgetsListViewModel
+            ViewBag.Gadgets = (from p in repository.Gadgets
+                               where categoryid == 0 || p.SubcategoryId == categoryid
+                               orderby p.GadgetId
+                               select p)
+                              .Skip((page - 1) * pageSize)
+                              .Take(pageSize);
+
+            ViewBag.PagingInfo = new PagingInfo
             {
-                Gadgets = repository.Gadgets
-                    .Where(p => category == null || p.Category == category)
-                    .OrderBy(gadget => gadget.GadgetId)
-                    .Skip((page - 1) * pageSize)
-                    .Take(pageSize),
-                PagingInfo = new PagingInfo
-                {
-                    CurrentPage = page,
-                    ItemsPerPage = pageSize,
-                    TotalItems = category == null ?
-                        repository.Gadgets.Count() :
-                        repository.Gadgets.Where(gadget => gadget.Category == category).Count()
-                },
-                CurrentCategory = category
+                CurrentPage = page,
+                ItemsPerPage = pageSize,
+                TotalItems = categoryid == 0 ?
+                    repository.Gadgets.Count() :
+                    repository.Gadgets.Where(gadget => gadget.SubcategoryId == categoryid).Count()
             };
-            return View(model);
+
+            ViewBag.CanShowPageSelector = canshowpageselector;
+            return View();
         }
         public ViewResult Details(int gadgetId)
         {
             Gadget gadget = repository.Gadgets.Single(p => p.GadgetId == gadgetId);
             return View(gadget);
         }
-        public ActionResult Search(string target = "", int page = 1)
+
+        public ActionResult Search(string target, int page = 1)
         {
-            var model = new GadgetsListViewModel()
+            ViewBag.Gadgets = (from g in repository.Gadgets
+                               where g.Name.Contains(target)
+                               select g)
+                              .Skip((page - 1) * pageSize)
+                              .Take(pageSize).Reverse();
+
+            ViewBag.PagingInfo = new PagingInfo
             {
-                Gadgets = repository.Gadgets
-                    .Where(p => p.Name.Contains(target))
-                    .Skip((page - 1) * pageSize)
-                    .Take(pageSize).Reverse(),
-                SearchWord = target
+                CurrentPage = page,
+                ItemsPerPage = pageSize,
+                TotalItems = repository.Gadgets.Where(g => g.Name.Contains(target)).Count()
             };
 
-            @ViewData["target"] = target;
+            ViewBag.SearchValue = target;
 
-            if (Request.IsAjaxRequest() && !string.IsNullOrEmpty(target))
-            {
-                return PartialView("DisplayGadgets", model);
-            }
-            return View(model);
+            return View();
         }
-        [OutputCache(Duration = 1600, Location = System.Web.UI.OutputCacheLocation.Downstream)]
-        public FileResult GetImage(int gadgetId)
+        [OutputCache(Duration = 2000, Location = System.Web.UI.OutputCacheLocation.Downstream)]
+        public FileResult GetImage(int gadgetId = 0)
         {
-            var photo = repository.Images.FirstOrDefault(x => x.GadgetId == gadgetId);
-            return File(Server.MapPath(photo?.Path), "image/jpeg");
+            return File(Server.MapPath($"~/Pictures/{gadgetId}.jpg"), "image/jpeg");
         }
 
     }

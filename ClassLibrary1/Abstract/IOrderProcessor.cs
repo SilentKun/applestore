@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AppleStore.Domain.Entities;
-
-namespace AppleStore.Domain.Abstract
+﻿namespace AppleStore.Domain.Abstract
 {
+    using AppleStore.Domain.Entities;
     public interface IOrderProcessor
     {
         void ProcessOrder(Cart cart, ShippingDetails shippingDetails);

@@ -8,6 +8,7 @@ namespace AppleStore.WebUI.Infrastructure.Concrete
 {
     public class FormAuthProvider : IAuthProvider
     {
+        [Obsolete]
         public bool Authenticate(string username, string password)
         {
             bool result = FormsAuthentication.Authenticate(username, password);

@@ -4,13 +4,12 @@ using AppleStore.Domain.Entities;
 using AppleStore.Domain.Abstract;
 using AppleStore.WebUI.Models;
 using Microsoft.AspNet.Identity;
-using System.Data.Entity;
 
 namespace AppleStore.WebUI.Controllers
 {
     public class CartController : Controller
     {
-        private IGadgetRepository repository;
+        private readonly IGadgetRepository repository;
         private IOrderProcessor orderProcessor;
 
         public CartController(IGadgetRepository repo, IOrderProcessor processor)

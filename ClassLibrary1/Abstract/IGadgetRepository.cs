@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
-using AppleStore.Domain.Entities;
-
-namespace AppleStore.Domain.Abstract
+﻿namespace AppleStore.Domain.Abstract
 {
+    using System.Collections.Generic;
+    using AppleStore.Domain.Entities;
     public interface IGadgetRepository
     {
         IEnumerable<Gadget> Gadgets { get; }
-        IEnumerable<Image> Images { get; }
         IEnumerable<Order> Orders { get; }
+        IEnumerable<Category> Categories { get; }
+        IEnumerable<Subcategory> Subcategories { get; }
+
+        IEnumerable<Company> Companies { get; }
         void SaveOrder(Order order);
     }
 }

@@ -1,15 +1,8 @@
 ﻿@model AppleStore.Domain.Entities.Gadget
-
-    <li>
-
-       
-            <img class="pictureMainp" src="@Url.Action("GetImage", "Gadget", new {Model.GadgetId})">
-        
-        @Html.ActionLink("Подробнее", "Details", new { gadgetId = Model.GadgetId }, new { @class = "More" })
-
-        <div class="descr">«@Model.Name»</div> <br>
-        <span class="price">@Model.Price.ToString("# руб")</span>
-
-        @Html.Action("HaveGadgetInCart", "Cart", new { gadgetId = Model.GadgetId })
-       
-    </li>
+<li>
+    <img class="pictureMainp" src="@Url.Action("GetImage", "Gadget", new { Model.GadgetId })">       
+    @Html.ActionLink("Подробнее", "Details", new { gadgetId = Model.GadgetId }, new { @class = "More" })
+    <div class="descr">«@Model.Name»</div> <br>
+    <span class="price">@Model.Price.ToString("# руб")</span>
+    @Html.Action("HaveGadgetInCart", "Cart", new { gadgetId = Model.GadgetId })   
+</li>

@@ -54,7 +54,7 @@ namespace AppleStore.WebUI.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             System.Web.Mvc.DependencyResolver.SetResolver(new
-                AppleStore.WebUI.Infrastructure.NinjectDependencyResolver(kernel));
+                Infrastructure.NinjectDependencyResolver(kernel));
         }        
     }
 }

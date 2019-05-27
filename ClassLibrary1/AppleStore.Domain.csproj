@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -74,11 +75,21 @@
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\EFGadgetRepository.cs" />
     <Compile Include="Concrete\EmailOrderProcessor.cs" />
+    <Compile Include="Entities\Camera.cs" />
     <Compile Include="Entities\Cart.cs" />
+    <Compile Include="Entities\Casing.cs" />
+    <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\Company.cs" />
+    <Compile Include="Entities\CPU.cs" />
+    <Compile Include="Entities\Display.cs" />
+    <Compile Include="Entities\DisplayTechnology.cs" />
     <Compile Include="Entities\Gadget.cs" />
-    <Compile Include="Entities\Image.cs" />
+    <Compile Include="Entities\Material.cs" />
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\ShippingDetails.cs" />
+    <Compile Include="Entities\OperatingSystem.cs" />
+    <Compile Include="Entities\Subcategory.cs" />
+    <Compile Include="Entities\WaterResistant.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

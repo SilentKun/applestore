@@ -1,31 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using AppleStore.Domain.Abstract;
-
-namespace AppleStore.WebUI.Controllers
+﻿namespace AppleStore.WebUI.Controllers
 {
+    using System.Linq;
+    using System.Web.Mvc;
+    using AppleStore.Domain.Abstract;
+
     public class NavController : Controller
     {
-        // GET: Nav
-        private IGadgetRepository repository;
+        private readonly IGadgetRepository repository;
 
         public NavController(IGadgetRepository repo)
         {
             repository = repo;
         }
 
-        public PartialViewResult Menu(string category = null)
+        public PartialViewResult Menu()
         {
-            ViewBag.SelectedCategory = category;
+            ViewBag.Companies = repository.Companies.Where(c => !c.Title.Contains("Apple"));
+            ViewBag.Categories = repository.Categories;
+            ViewBag.Subcategories = repository.Subcategories;
 
-            IEnumerable<string> categories = repository.Gadgets
-                .Select(gadget => gadget.Category)
-                .Distinct()
-                .OrderBy(x => x);
-            return PartialView(categories);
+            return PartialView();
         }
     }
 }
