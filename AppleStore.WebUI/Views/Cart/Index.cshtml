@@ -1,22 +1,20 @@
 ﻿@model AppleStore.WebUI.Models.CartIndexViewModel
 
 @{
-    ViewBag.Title = "Apple Store: ваша корзина";
+    ViewBag.Title = "iGadget Store: Корзина";
 }
-<div class="container">
-    <div class="result-menu">
+<div class="container" style="background-color: #fff;padding: 1em;margin-top: 30px;">
+    <div class="result-menu" style="text-align: center">
         <div id="Result">Итого</div>
-        <div class="count-products">
+        <div>
             <p>Товаров в корзине: <span>#@Model.Cart.ItemsCount()</span></p>
         </div>
         @if (Model.Cart.ItemsCount() != 0)
         {
-            <div class="count-money">
-                <p>На сумму: <span>@Model.Cart.ComputeTotalValue().ToString("# руб")</span></p>
+            <div>
+                <p>На сумму: <span>@Model.Cart.ComputeTotalValue().ToString("# ₽")</span></p>
             </div>
         }
-        
-
     </div>
     <div id="header-list-cart">
         <div id="head1">Изображение</div>
@@ -61,7 +59,7 @@
             </div>
 
             <div class="price-product">
-                <h5>@line.Gadget.Price.ToString("# руб")</h5> <p></p>
+                <h5>@line.Gadget.Price.ToString("# ₽")</h5> <p></p>
             </div>
             <div class="delete-cart">
                 @using (Html.BeginForm("RemoveFromCart", "Cart"))
@@ -80,16 +78,19 @@
 
     }
 
-        <div class="btn-cart">
-            <a class="btn btn-outline-dark my-2 my-sm-0" href="@Model.ReturnUrl">Продолжить покупки</a>
-            @if (@HttpContext.Current.User.Identity.IsAuthenticated)
-            {
-                @Html.ActionLink("Оформить заказ", "Checkout", null, new { @type = "buttonNext", @class = "btn btn-outline-dark my-2 my-sm-0" })
-            }
-            @if (!@HttpContext.Current.User.Identity.IsAuthenticated)
-            {
-                <a class="btn btn-outline-dark my-2 my-sm-0" href='@Url.Action("Login", "Account")'>Чтобы оформить заказ авторизируйтесь!</a>
-            }
-        </div>
+    <div class="btn-cart">
+        @if (Model.ReturnUrl != null)
+        {
+            <a class="btn btn-outline-dark my-2 my-sm-0" href="@Model.ReturnUrl"style="color: #fff">Продолжить покупки</a>
+        }
+        @if (HttpContext.Current.User.Identity.IsAuthenticated)
+        {
+            @Html.ActionLink("Оформить заказ", "Checkout", null, new {type = "buttonNext", @class = "btn btn-outline-dark my-2 my-sm-0"})
+        }
+        else
+        {
+            <a class="btn btn-outline-dark my-2 my-sm-0" href='@Url.Action("Login", "Account")'>Чтобы оформить заказ авторизируйтесь!</a>
+        }
+    </div>
 </div>
 

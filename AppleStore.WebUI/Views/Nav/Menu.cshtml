@@ -1,60 +1,61 @@
 ﻿@using AppleStore.Domain.Entities
-    <ul class="navbar-nav mr-auto">
-        @foreach (Category category in ViewBag.Categories)
+
+<ul class="navbar-nav mr-auto">
+    @foreach (Category category in ViewBag.Categories)
+    {
+        if (!category.Company.Title.Contains("Apple"))
         {
-            if (!category.Company.Title.Contains("Apple"))
+            break;
+        }
+    <li class="nav-item dropdown">
+        @*dropdown-toggle*@
+        <a class="nav-link " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-right: 10px;">
+            @category.Title
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            @foreach (Subcategory subcat in ViewBag.Subcategories)
             {
-                break;
+                if (subcat.CategoryId == category.Id)
+                {
+                    @Html.RouteLink(subcat.Title, new
+                    {
+                        controller = "Gadget",
+                        action = "List",
+                        categoryid = subcat.Id,
+                        page = 1
+                    }, new { @class = "dropdown-item" })
+       
+                }
             }
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    @category.Title
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    @foreach (Subcategory subcat in ViewBag.Subcategories)
+        </div>
+    </li>
+    }
+
+    @foreach (Company company in ViewBag.Companies)
+    {
+
+        <li class="nav-item dropdown">
+            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-right: 10px;">
+                @company.Title
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                @foreach (Subcategory subcat in ViewBag.Subcategories)
+                {
+                    if (subcat.Category.Company.Title.Contains(company.Title))
                     {
-                        if (subcat.CategoryId == category.Id)
-                        {
-                            @Html.RouteLink(subcat.Title, new
-                               {
-                                   controller = "Gadget",
-                                   action = "List",
-                                   categoryid = subcat.Id,
-                                   page = 1
-                               }, new { @class = "dropdown-item" })
-                            @*<div class="dropdown-divider"></div>*@
-                        }
+                        @Html.RouteLink(subcat.Title, new
+                           {
+                               controller = "Gadget",
+                               action = "List",
+                               categoryid = subcat.Id,
+                               page = 1
+                           }, new { @class = "dropdown-item" })
+
                     }
-                </div>
-            </li>
-        }
+                }
+            </div>
+        </li>
+    }
+</ul>
 
-        @foreach (Company company in ViewBag.Companies)
-        {
-
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    @company.Title
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    @foreach (Subcategory subcat in ViewBag.Subcategories)
-                    {
-                        if (subcat.Category.Company.Title.Contains(company.Title))
-                        {
-                                @Html.RouteLink(subcat.Title, new
-                                   {
-                                       controller = "Gadget",
-                                       action = "List",
-                                       categoryid = subcat.Id,
-                                       page = 1
-                                   }, new { @class = "dropdown-item" })
-
-                        }
-                    }
-                </div>
-            </li>
-        }
-    </ul>
-
-@Html.Action("Summary", "Cart")
 

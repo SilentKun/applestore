@@ -1,0 +1,54 @@
+﻿@model IEnumerable<AppleStore.Domain.Entities.Gadget>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+
+<table class="table" style="background-color: #fff;text-align: center;width: 1000px;margin: 0 auto; box-shadow: 1px 1px 11px 1px rgba(30, 30, 30, 0.1);">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SubcategoryId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.CategoryId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SubcategoryId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Price)
+    </td>
+    <td>
+    @Html.ActionLink("Редактировать", "Edit", new { gadgetId = item.GadgetId })
+    </td>
+    @*      <td>*@
+    @*@Html.ActionLink("Edit", "Edit", new { id=item.GadgetId }) |
+         |
+        @Html.ActionLink("Delete", "Delete", new { id=item.GadgetId })*@
+    @*   </td> *@
+</tr>
+    }
+
+</table>

@@ -1,0 +1,179 @@
+﻿@model AppleStore.Domain.Entities.Gadget
+
+@{
+    ViewBag.Title = "Админ панель: редактирование товара";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="panel">
+        <div class="panel-heading" style="text-align: center;margin-top: 15px">
+            <h3>Редактирование «@Model.Name»</h3>
+        </div>
+
+        @using (Html.BeginForm())
+        {
+    <div class="panel-body" style="width: 500px; margin: 0 auto; text-align: center;">
+        @Html.HiddenFor(m => m.GadgetId)
+        <div class="form-group">
+
+            <p>Name</p>
+            @Html.TextBoxFor(m => Model.Name, new { @class = "form-control" })
+            <p>Price</p>
+            @Html.TextBoxFor(m => Model.Price, new { @class = "form-control" })
+
+            @if (!string.IsNullOrEmpty(Model.Sensors))
+            {
+                <p>Sensors</p>
+                @Html.TextBoxFor(m => Model.Sensors, new { @class = "form-control" })
+            }
+
+            @if (!string.IsNullOrEmpty(Model.SIMType))
+            {
+                <p>SIMType</p>
+                @Html.TextBoxFor(m => Model.SIMType, new { @class = "form-control" })
+            }
+
+            <p>ROM</p>
+            @Html.TextBoxFor(m => Model.ROM, new { @class = "form-control" })
+
+            <p>Subcategory Title</p>
+            @Html.TextBoxFor(m => Model.Subcategory.Title, new {@class = "form-control", @readonly = "true"})
+            <p>Subcategory Id</p>
+
+            @Html.TextBoxFor(m => Model.SubcategoryId, new { @class = "form-control" })
+
+            <p>Category Title</p>
+            @Html.TextBoxFor(m => Model.Category.Title, new {@class = "form-control", @readonly = "true"})
+            <p>Category Id</p>
+            @Html.TextBoxFor(m => Model.CategoryId, new { @class = "form-control" })
+
+            @if (!string.IsNullOrEmpty(Model.BatteryCapacity))
+            {
+                <p>BatteryCapacity</p>
+                @Html.TextBoxFor(m => Model.BatteryCapacity, new { @class = "form-control" })
+            }
+
+            @if (!string.IsNullOrEmpty(Model.Equipment))
+            {
+                <p>Equipment</p>
+                @Html.TextBoxFor(m => Model.Equipment, new { @class = "form-control" })
+            }
+
+            @if (!string.IsNullOrEmpty(Model.MiniJack))
+            {
+                <p>MiniJack</p>
+
+                @Html.TextBoxFor(m => Model.MiniJack, new { @class = "form-control" })
+            }
+
+            <p>RAM</p>
+            @Html.TextBoxFor(m => Model.RAM, new { @class = "form-control" })
+
+            @if (Model.CameraId.HasValue)
+            {
+                <p>CameraResolution</p>
+                @Html.TextBoxFor(m => Model.Camera.CameraResolution, new { @class = "form-control" })
+
+                <p>VidResolutionH</p>
+                @Html.TextBoxFor(m => Model.Camera.VidResolutionH, new { @class = "form-control" })
+
+                <p>VidResolutionW</p>
+                @Html.TextBoxFor(m => Model.Camera.VidResolutionW, new { @class = "form-control" })
+            }
+
+            @if (Model.CPUId.HasValue)
+            {
+                <p>CPU Title</p>
+                @Html.TextBoxFor(m => Model.CPU.Title, new {@class = "form-control", @readonly = "true"})
+                <p>CPU Id</p>
+                @Html.TextBoxFor(m => Model.CPU.Id, new { @class = "form-control" })
+            }
+
+            <p>Casing Height</p>
+            @Html.TextBoxFor(m => Model.Casing.Height, new { @class = "form-control" })
+
+        <p>Casing Width</p>
+            @Html.TextBoxFor(m => Model.Casing.Width, new { @class = "form-control" })
+
+        <p>Casing Thickness</p>
+            @Html.TextBoxFor(m => Model.Casing.Thickness, new { @class = "form-control" })
+
+        <p>Casing Weight</p>
+            @Html.TextBoxFor(m => Model.Casing.Weight, new { @class = "form-control" })
+
+            @if (Model.Casing.MaterialId.HasValue)
+            {
+        <p>Material Title</p>
+                @Html.TextBoxFor(m => Model.Casing.Material.Title, new {@class = "form-control", @readonly = "true"})
+        <p>Material Id</p>
+                @Html.TextBoxFor(m => Model.Casing.MaterialId, new { @class = "form-control" })
+            }
+            @if (Model.Casing.WaterResistantId.HasValue)
+            {
+        <p>WaterResistant Title</p>
+                @Html.TextBoxFor(m => Model.Casing.WaterResistant.Title, new {@class = "form-control", @readonly = "true"})
+        <p>WaterResistant Id</p>
+                @Html.TextBoxFor(m => Model.Casing.WaterResistant.Id, new { @class = "form-control" })
+            }
+
+        <p>Company Title</p>
+            @Html.TextBoxFor(m => Model.Company.Title, new { @class = "form-control" , @readonly = "true"})
+        <p>Company Id</p>
+            @Html.TextBoxFor(m => Model.CompanyId, new { @class = "form-control" })
+
+        <p>OperatingSystem Title</p>
+            @Html.TextBoxFor(m => Model.OperatingSystem.Title, new { @class = "form-control", @readonly = "true" })
+            <p>OperatingSystem Id</p>
+            @Html.TextBoxFor(m => Model.OperatingSystemId, new { @class = "form-control" })
+
+            @if (Model.DisplayId.HasValue)
+            {
+                if (Model.Display.AspectRatioH.HasValue)
+                {
+                    <p>AspectRatioH</p>
+                    @Html.TextBoxFor(m => Model.Display.AspectRatioH, new {@class = "form-control"})
+                }
+                if (Model.Display.AspectRatioW.HasValue)
+                {
+                    <p>AspectRatioW</p>
+                    @Html.TextBoxFor(m => Model.Display.AspectRatioW, new {@class = "form-control"})
+                }
+                if (Model.Display.ResolutionH.HasValue)
+                {
+                    <p>ResolutionH</p>
+                    @Html.TextBoxFor(m => Model.Display.ResolutionH, new {@class = "form-control"})
+                }
+                if (Model.Display.ResolutionW.HasValue)
+                {
+                    <p>ResolutionW</p>
+                    @Html.TextBoxFor(m => Model.Display.ResolutionW, new {@class = "form-control"})
+                }
+                <p>Diagonal</p>
+                @Html.TextBoxFor(m => Model.Display.Diagonal, new { @class = "form-control" })
+
+                if (Model.Display.PPI.HasValue)
+                {
+                    <p>PPI</p>
+                    @Html.TextBoxFor(m => Model.Display.PPI, new {@class = "form-control"})
+                }
+                if (Model.Display.DisplayTechnologyId.HasValue)
+                {
+        <p>DisplayTechnology Title</p>
+                    @Html.TextBoxFor(m => Model.Display.DisplayTechnology.Title, new { @class = "form-control", @readonly = "true" })
+        <p>DisplayTechnology Id</p>
+                    @Html.TextBoxFor(m => Model.Display.DisplayTechnologyId, new { @class = "form-control" })
+                }
+            }
+
+
+        </div>
+    </div>
+            <div class="panel-footer" style="text-align: center;margin-top: 40px">
+                <input type="submit" value="Сохранить" class="btn btn-outline-dark my-2 my-sm-0" />
+                @Html.ActionLink("Отменить изменения и вернуться к списку", "Index", null, new
+                {
+                    @class = "btn btn-outline-dark my-2 my-sm-0"
+                })
+            </div>
+        }
+    </div>

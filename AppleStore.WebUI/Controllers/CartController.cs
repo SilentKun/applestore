@@ -41,16 +41,17 @@ namespace AppleStore.WebUI.Controllers
         [HttpPost]
         public ViewResult Checkout(Cart cart, ShippingDetails shippingDetails)
         {
-            if (cart.Lines.Count() == 0)
+            if (!cart.Lines.Any())
             {
                 ModelState.AddModelError("", "Извините, ваша корзина пуста!");
             }
+
             if (ModelState.IsValid)
             {
 
                 foreach (var item in cart.Lines)
                 {
-                    repository.SaveOrder(new Order { UserID = User.Identity.GetUserId(), GadgetID = item.Gadget.GadgetId });
+                    repository.SaveOrder(new Order { UserID = User.Identity.GetUserId(), GadgetID = item.Gadget.GadgetId, Count = item.Quantity});
                 }
 
             orderProcessor.ProcessOrder(cart, shippingDetails);
@@ -62,7 +63,7 @@ namespace AppleStore.WebUI.Controllers
                 return View(shippingDetails);
             }
         }
-
+        [Authorize]
         public ViewResult Index(Cart cart, string returnUrl)
         {
             return View(new CartIndexViewModel

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using AppleStore.WebUI.Models;
@@ -19,24 +17,26 @@ namespace AppleStore.WebUI.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public async Task<ActionResult> Register(RegisterModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Name = model.Name };
+
+            // добавляем роли в бд
+            var result = await UserManager.CreateAsync(user, model.Password);
+
+            if (result.Succeeded)
             {
-                ApplicationUser user = new ApplicationUser { UserName = model.Email, Email = model.Email, Name = model.Name };
-                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("Login", "Account");
-                }
-                else
-                {
-                    foreach (string error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error);
-                    }
-                }
+                return RedirectToAction("Login", "Account");
+            }
+
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error);
             }
             return View(model);
         }
@@ -52,6 +52,7 @@ namespace AppleStore.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
+               
                 ApplicationUser user = await UserManager.FindAsync(model.Email, model.Password);
                 if (user == null)
                 {
@@ -59,15 +60,15 @@ namespace AppleStore.WebUI.Controllers
                 }
                 else
                 {
-                    ClaimsIdentity claim = await UserManager.CreateIdentityAsync(user,
-                        DefaultAuthenticationTypes.ApplicationCookie);
-
+                   
+                    var claim = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
+                    
                     AuthenticationManager.SignOut();
                     AuthenticationManager.SignIn(new AuthenticationProperties
                     {
                         IsPersistent = true
                     }, claim);
-                    if (String.IsNullOrEmpty(returnUrl))
+                    if (string.IsNullOrEmpty(returnUrl))
                         return RedirectToAction("Index", "Home");
                     return Redirect(returnUrl);
                 }

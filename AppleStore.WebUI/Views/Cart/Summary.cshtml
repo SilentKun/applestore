@@ -1,6 +1,3 @@
 ﻿@model AppleStore.Domain.Entities.Cart
 
-
-<i class="fas fa-shopping-cart" style="color:Gainsboro"></i>@Html.ActionLink("Корзина (" + @Model.Lines.Sum(x => x.Quantity) + ")", "Index", "Cart",
-                                                       new { returnUrl = Request.Url.PathAndQuery },
-                                                       new { @class = "nav-link" })
+@Html.ActionLink("Корзина", "Index", "Cart", new { returnUrl = Request.Url?.PathAndQuery })

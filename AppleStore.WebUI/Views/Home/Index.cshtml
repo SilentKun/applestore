@@ -1,34 +1,34 @@
-﻿@using AppleStore.Domain.Entities
-@model IEnumerable<Gadget>
-<div class="container">
-    @if (@HttpContext.Current.User.Identity.IsAuthenticated)
+﻿@using System.Collections
+@using AppleStore.Domain.Entities
+@using AppleStore.WebUI.Controllers
+@model IEnumerable<AppleStore.WebUI.Controllers.OrderStr>
+<div class="container" style="background-color: #fff;padding: 1em;margin-top: 30px;">
+    @if (HttpContext.Current.User.Identity.IsAuthenticated)
     {
-        <div class="hello">
+        <div class="hello" style="text-align: center">
             <p>Здравствуйте: @HttpContext.Current.User.Identity.Name</p>
-
         </div>
         <div class="orders">
             Ваши заказы
         </div>
-        foreach (var line in Model)
+        foreach (var line in (IEnumerable<OrderStr>)ViewBag.List)
         {
-            <div class="cartstyles">
+<div class="cartstyles" style="width: 70%;margin: 25px auto">
 
-                <div class="img-cart">
-                    <p > <img src="@Url.Action("GetImage", "Gadget", new { line.GadgetId })" alt="" class="picInBasket"></p>
-                </div>
-                <div class="title-cart">
-                    <p> <a href="/Gadget/Details?gadgetId=@line.GadgetId">@line.Name</a> </p>
-                </div>
+    <div class="img-cart">
+        <p> <img src="@Url.Action("GetImage", "Gadget", new { line.Gadget.GadgetId })" alt="" class="picInBasket"></p>
+    </div>
+    <div class="title-cart">
+        <p> <a href="/Gadget/Details?gadgetId=@line.Gadget.GadgetId">@line.Gadget.Name</a> </p>
+    </div>
 
+    <div class="price-product">
+        <h5>@line.Gadget.Price.ToString($"{line.Count} x # ₽")</h5> <p></p>
+    </div>
 
-                <div class="price-product">
-                    <h5>@line.Price.ToString("# руб")</h5> <p></p>
-                </div>
-
-                <div id="bottom-cart-line">
-                </div>
-            </div>
+    <div id="bottom-cart-line">
+    </div>
+</div>
 
         }
 
@@ -37,15 +37,3 @@
     }
 
 </div>
-    @*@if (!@HttpContext.Current.User.Identity.IsAuthenticated)
-    {<div>Авторизируйтесь!</div>}
-
-
-</div>
-<div>
-    Здравствуйте: @HttpContext.Current.User.Identity.Name
-
-</div>
-<div>
-    <a class="btn btn-primary" href='@Url.Action("Logout", "Account")'>Выйти из аккаунта</a>
-</div>*@

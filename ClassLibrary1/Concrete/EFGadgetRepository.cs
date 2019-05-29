@@ -62,5 +62,39 @@
             context.Orders.Add(order);
             context.SaveChanges();
         }
+
+        public void SaveGadget(Gadget gadget)
+        {
+            var dbEntry = context.Gadgets.Find(gadget.GadgetId);
+            if (dbEntry != null)
+            {
+                dbEntry.Name = gadget.Name;
+                dbEntry.Price = gadget.Price;
+                dbEntry.CategoryId = gadget.CategoryId;
+                dbEntry.SubcategoryId = gadget.SubcategoryId;
+                dbEntry.BatteryCapacity = gadget.BatteryCapacity;
+                dbEntry.CPUId = gadget.CPUId;
+                dbEntry.CameraId = gadget.CameraId;
+                dbEntry.RAM = gadget.RAM;
+                dbEntry.Equipment = gadget.Equipment;
+                dbEntry.ROM = gadget.ROM;
+                dbEntry.MiniJack = gadget.MiniJack;
+                dbEntry.SIMType = gadget.SIMType;
+                dbEntry.Sensors = gadget.Sensors;
+
+                dbEntry.Display = gadget.Display;
+                dbEntry.Camera = gadget.Camera;
+                dbEntry.Casing = gadget.Casing;
+                dbEntry.Casing.WaterResistantId = gadget.Casing.WaterResistantId;
+
+                dbEntry.Casing.MaterialId = gadget.Casing.MaterialId;
+                dbEntry.Display.DisplayTechnologyId = gadget.Display.DisplayTechnologyId;
+                dbEntry.CompanyId = gadget.CompanyId;
+                dbEntry.OperatingSystemId = gadget.OperatingSystemId;
+
+
+            }
+            context.SaveChanges();
+        }
     }
 }

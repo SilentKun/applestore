@@ -4,9 +4,8 @@
 }
 
 <section>
-    <div>
-        <div class="container">
-            <div class="gadgets" id="scrolList">
+        <div class="container" style="margin-top: 25px">
+            <div class="gadgets" id="scrolList" style="width: 1090px;margin: 0 auto;">
                 <ul>
                     @Html.Partial("DisplayGadgets")
                 </ul>
@@ -16,6 +15,5 @@
                 @Html.PageLinks((PagingInfo)ViewBag.PagingInfo, x => Url.Action("Search", new { target = ViewBag.SearchValue, page = x }))
             </div>
         </div>
-    </div>
 </section>
 

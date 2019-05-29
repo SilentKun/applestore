@@ -5,17 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="~/Content/CommonStyles.css">
     <link rel="stylesheet" href="~/Content/Styles.css">
-    <link rel="stylesheet" href="~/Content/swiper.min.css">
+    <link rel="stylesheet" href="~/Content/swiper.css">
     <link rel="stylesheet" href="~/Content/animate.min.css">
     <link rel="stylesheet" href="~/Content/all.css">
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="~/Content/ErrorStyles.css">
     <script src="~/Scripts/jquery-3.3.1.js"></script>
+
     <title>@ViewBag.Title</title>
 </head>
 
@@ -24,15 +26,17 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-white">
             <div class="container">
                 <a class="navbar-brand" href="/././">
-                    <img src="~/Image/logo.png" class="logo">
-                    <a class="LogoText" href="/././">iGadget Store<br><span>Интернет-магазин гаджетов</span></a>
+                    <img src="~/Content/Bez_imeni-1.png" class="logo" alt="">
+                    <a class="LogoText" href="/././">iGadget Store</a>
                 </a>
 
-                <div class="collapse navbar-collapse" id="navbar1">
-                    <div id="text-xl-right" data-xs="2" data-sm="1">
-                        @if (@HttpContext.Current.User.Identity.IsAuthenticated)
+                <div class="collapse navbar-collapse" id="navbar1"> 
+                    <div id="text-xl-right" data-xs="3" data-sm="1">
+                        @Html.Action("Summary", "Cart")
+                        <span>|</span>
+                        @if (HttpContext.Current.User.Identity.IsAuthenticated)
                         {
-                            <a class="lft" href='@Url.Action("Index", "Home")'>Личный кабинет</a>
+                            <a href='@Url.Action("Index", "Home")'>Личный кабинет</a>
                             <span>|</span>
                             <a href='@Url.Action("Logout", "Account")'>Выход</a>
                         }
@@ -43,103 +47,103 @@
                             <a href='@Url.Action("Register", "Account")'>Регистрация</a>
                         }
                     </div>
+                    @using (Html.BeginForm("Search", "Gadget", FormMethod.Get, new { @class = "form-inline my-2 my-lg-0", id = "SearchButton" }))
+                    {
+                        @Html.TextBox("target", (string)ViewBag.SearchValue, new { @class = "form-control", type = "search", style = "margin-left: 50px;margin-right: 5px;" })
+                        <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Поиск</button>
+                    }
                 </div>
             </div>
         </nav>
     </header>
 
-    <nav class="navbar navbar-expand-lg sticky-top navbar-dark">
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark" style="margin-bottom: -3px;">
         <div class="container">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"/>
+                <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 @Html.Action("Menu", "Nav")
-                @using (Html.BeginForm("Search", "Gadget", FormMethod.Get, new { @class = "form-inline my-2 my-lg-0", @id = "SearchButton" }))
-                {
-                    @Html.TextBox("target", (string)ViewBag.SearchValue, htmlAttributes: new { @class = "form-control mr-sm-2", @type = "search" })
-                    <button class="btn btn-outline-light my-2 my-sm-0 standart" type="submit">Поиск</button>
-                }
             </div>
+
         </div>
     </nav>
 
     <!-- Swiper -->
-    @if (Request.Url.Query == "" && Request.Url.AbsolutePath.Length == 1)
+    @if (Request.Url?.Query == "" && Request.Url.AbsolutePath.Length == 1)
     {
-      
-<div class="swiper-container">
-    <div class="swiper-wrapper">
-        <div class="swiper-slide" style="background-image: url(image/Da-iPhon-X-is-da-neu-Flaggschif-Smartphon-vo-Appl-257742.jpg); height: 505px;">
-            <div class="container">
-                <div class="text-xs-left">
-                    <div class="slide-text">
-                        <h1>iPhone XS</h1>
-                        <h2>Лучший в своём роде.</h2>
-                        <p>От 71 990 руб.</p>
-                        <a href="@Url.Action("Details", new { gadgetId = 13 })" class="btn btn-outline-light my-2 my-sm-0" role="button">Купить</a>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" style="background-image: url(Image/1.jpg); height: 490px;">
+                    <div class="container">
+                        <div class="text-xs-left">
+                            <div class="slide-text">
+                                <h1>iPhone XS</h1>
+                                <h2>Лучший в своём роде.</h2>
+                                <p>От 71 990 руб.</p>
+                                <a href="@Url.Action("Details", new { gadgetId = 13 })" class="btn btn-outline-dark my-2 my-sm-0" style="font-size: large;text-shadow: 0 0 0" role="button">Купить</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide" style="background-image: url(image/iPhone-XR-XS-wallpaper-mockup.jpg); height: 490px;">
+                    <div class="container">
+                        <div class="text-xs-left">
+                            <div class="slide-text">
+                                <h1>iPhone XR</h1>
+                                <h2>Прекрасен во всех отношениях.</h2>
+                                <p>От 53 999 руб.</p>
+                                <a href="@Url.Action("Details", new { gadgetId = 45 })" class="btn btn-outline-dark my-2 my-sm-0" style="font-size: large;text-shadow: 0 0 0" role="button">Купить</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide" style="background-image: url(image/iPhone-8.jpg); height: 490px;">
+                    <div class="container">
+                        <div class="text-xs-left">
+                            <div class="slide-text">
+                                <h1>iPhone 8</h1>
+                                <h2>Интеллект под стеклом.</h2>
+                                <p>От 40 999 руб.</p>
+                                <a href="@Url.Action("Details", new { gadgetId = 16 })" class="btn btn-outline-dark my-2 my-sm-0" style="font-size: large;text-shadow: 0 0 0" role="button">Купить</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide" style="background-image: url(image/ipadpro.jpg); height: 490px;">
+                    <div class="container">
+                        <div class="text-xs-left">
+                            <div class="slide-text">
+                                <h1>iPad Pro 2018</h1>
+                                <h2>
+                                    Новый. Может всё.
+                                    С дисплеем от и до.
+                                </h2>
+                                <p>От 55 499 руб.</p>
+                                <a href="@Url.Action("Details", new { gadgetId = 25 })" class="btn btn-outline-dark my-2 my-sm-0" style="font-size: large;text-shadow: 0 0 0"  role="button">Купить</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide" style="background-image: url(image/air.jpg); height: 490px;">
+                    <div class="container">
+                        <div class="text-xs-left">
+                            <div class="slide-text">
+                                <h1>MacBook Air 2018</h1>
+                                <h2>
+                                    Почти невесомый.
+                                    На новой высоте.
+                                </h2>
+                                <p>От 149 990 руб.</p>
+                                <a href="@Url.Action("Details", new { gadgetId = 11 })" class="btn btn-outline-dark my-2 my-sm-0" style="font-size: large;text-shadow: 0 0 0" role="button">Купить</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="swiper-slide" style="background-image: url(image/iPhone-XR-XS-wallpaper-mockup.jpg); height: 505px;">
-            <div class="container">
-                <div class="text-xs-left">
-                    <div class="slide-text">
-                        <h1>iPhone XR</h1>
-                        <h2>Прекрасен во всех отношениях.</h2>
-                        <p>От 53 999 руб.</p>
-                        <a href="@Url.Action("Details", new { gadgetId = 45 })" class="btn btn-outline-light my-2 my-sm-0" role="button">Купить</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="swiper-slide" style="background-image: url(image/iPhone-8.jpg); height: 505px;">
-            <div class="container">
-                <div class="text-xs-left">
-                    <div class="slide-text">
-                        <h1>iPhone 8</h1>
-                        <h2>Интеллект под стеклом.</h2>
-                        <p>От 40 999 руб.</p>
-                        <a href="@Url.Action("Details", new { gadgetId = 16 })" class="btn btn-outline-light my-2 my-sm-0" role="button">Купить</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="swiper-slide" style="background-image: url(image/ipadpro.jpg); height: 505px;">
-            <div class="container">
-                <div class="text-xs-left">
-                    <div class="slide-text">
-                        <h1>iPad Pro 2018</h1>
-                        <h2>
-                            Новый. Может всё.
-                            С дисплеем от и до.
-                        </h2>
-                        <p>От 55 499 руб.</p>
-                        <a href="@Url.Action("Details", new { gadgetId = 25 })" class="btn btn-outline-light my-2 my-sm-0" role="button">Купить</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="swiper-slide" style="background-image: url(image/air.jpg); height: 505px;">
-            <div class="container">
-                <div class="text-xs-left">
-                    <div class="slide-text">
-                        <h1>MacBook Air 2018</h1>
-                        <h2>
-                            Почти невесомый.
-                            На новой высоте.
-                        </h2>
-                        <p>От 149 990 руб.</p>
-                        <a href="@Url.Action("Details", new { gadgetId = 11 })" class="btn btn-outline-light my-2 my-sm-0" role="button">Купить</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-</div>
         <script src="~/Scripts/swiper.min.js"></script>
         <!-- Initialize Swiper -->
         <script>
@@ -148,44 +152,33 @@
 
                     navigation: {
                         nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
+                        prevEl: '.swiper-button-prev'
                     },
                     autoplay: {
                         delay: 2700,
-                        disableOnInteraction: false
-
+                        disableOnInteraction: true
                     }
                 });
         </script>
-
-
-        <div class="container">
-            <div class="namelist">
-                <h3>Избранные товары</h3>
-            </div>
-        </div>
     }
 
     @RenderBody()
 
-    <div class="container">
+    <div class="container" style="width: 100%;min-width: 100%;">
         <footer>
-            <div class="navbar-fixed-bottom row-fluid">
-                <div class="navbar-inner">
-                    <a class="navbar-brand" href="/././">
-                        <img src="~/Image/logo.png" class="logo">
-                        <a class="LogoText1" href="/././">iGadget Store<br></a>
-                    </a>
-
+                <div>
                     <nav>
-                        <ul class="paymenu">
-                            <li>
+
+                        <ul class="paymenu" style="text-align: center">
+                            <li style="display: inline-block;">
+                                <img src="~/Content/Bez_imeni-1.png" class="paymentpictures" alt="" style="height: 40px;width: 40px;">
+                            </li>
+                            <li style="display: inline-block;">
                                 <img src="~/image/payment-type-logos.png.jpg" alt="" class="paymentpictures">
                             </li>
                         </ul>
                     </nav>
                 </div>
-            </div>
         </footer>
     </div>
 </body>

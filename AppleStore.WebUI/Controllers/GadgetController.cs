@@ -21,7 +21,7 @@ namespace AppleStore.WebUI.Controllers
             ViewBag.Gadgets = (from p in repository.Gadgets
                                where categoryid == 0 || p.SubcategoryId == categoryid
                                orderby p.GadgetId
-                               select p)
+                               select p).Reverse()
                               .Skip((page - 1) * pageSize)
                               .Take(pageSize);
 
@@ -31,7 +31,7 @@ namespace AppleStore.WebUI.Controllers
                 ItemsPerPage = pageSize,
                 TotalItems = categoryid == 0 ?
                     repository.Gadgets.Count() :
-                    repository.Gadgets.Where(gadget => gadget.SubcategoryId == categoryid).Count()
+                    repository.Gadgets.Count(gadget => gadget.SubcategoryId == categoryid)
             };
 
             ViewBag.CanShowPageSelector = canshowpageselector;

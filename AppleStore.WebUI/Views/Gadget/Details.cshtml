@@ -6,112 +6,109 @@
 <div class="container">
     <div class="descrinmore">
         <div>
-            <img src="@Url.Action("GetImage", "Gadget", new { Model.GadgetId })" alt="" class="photo">
+            <img src="@Url.Action("GetImage", "Gadget", new { Model.GadgetId })" alt="" class="photo" style="margin-right: 15px">
+        </div>
+        <h3>«@Model.Name»</h3>
+        <h1 style="margin-bottom: -15px;">@Model.Price.ToString("# ₽")</h1>
+        <div>
+            @Html.Action("HaveGadgetInCart", "Cart", new { gadgetid = Model.GadgetId })
         </div>
         <div class="DescriptionTop">
-            <h3 class="Name">«@Model.Name»</h3>
             <div class="Specifications">
                 <ul>
                     @if (Model.Casing.MaterialId.HasValue)
                     {
                         <li>
-                            <span class="specification">Материал корпуса: </span><span class="spec">@Model.Casing.Material.Title</span>
+                            <span class="specification">Материал корпуса: </span><span>@Model.Casing.Material.Title</span>
                         </li>
                     }
                     <li>
-                        <span class="specification">Разработчик: </span> <span class="spec">@Model.Company.Title</span>
+                        <span class="specification">Разработчик: </span> <span>@Model.Company.Title</span>
                     </li>
                     <li>
-                        <span class="specification">Операционная система: </span> <span class="spec">@Model.OperatingSystem.Title</span>
+                        <span class="specification">Операционная система: </span> <span>@Model.OperatingSystem.Title</span>
                     </li>
+                    @if (Model.CPUId.HasValue)
+                    {
+                        <li>
+                            <span class="specification">Процессор: </span><span>@Model.CPU.Title</span>
+                        </li>
+                    }
                     <li>
-                        <span class="specification">Процессор: </span><span class="spec">@Model.CPU.Title</span>
-                    </li>
-                    <li>
-                        <span class="specification">Количество оперативной памяти: </span><span class="spec">@Model.RAM.ToString("# Гбайт")</span>
+                        <span class="specification">Количество оперативной памяти: </span><span>@Model.RAM.ToString("# Гбайт")</span>
                     </li>
                     @if (Model.DisplayId.HasValue && Model.Display.ResolutionH.HasValue && Model.Display.ResolutionW.HasValue)
                     {
                         <li>
-                            <span class="specification">Разрешение экрана: </span><span class="spec">@Model.Display.ResolutionW x @Model.Display.ResolutionH</span>
+                            <span class="specification">Разрешение экрана: </span><span>@Model.Display.ResolutionW x @Model.Display.ResolutionH</span>
                         </li>
+                    }
+                    @if (Model.DisplayId.HasValue)
+                    {
+                        if (Model.Display.Diagonal.HasValue)
+                        {
+                            <li>
+                                <span class="specification">Диагональ экрана: </span><span>@Model.Display.Diagonal</span>
+                            </li>
+                        }
+                        if (Model.Display.AspectRatioW.HasValue || Model.Display.AspectRatioH.HasValue)
+                        {
+                            <li>
+                                <span class="specification">Соотношение сторон: </span><span>@($"{Model.Display.AspectRatioW}:{Model.Display.AspectRatioH}")</span>
+                            </li>
+                        }
+                        if (Model.Display.DisplayTechnologyId.HasValue)
+                        {
+                            <li>
+                                <span class="specification">Тип экрана: </span><span>@Model.Display.DisplayTechnology.Title</span>
+                            </li>
+                        }
                     }
                 </ul>
             </div>
-            <h1 class="Price" style="margin-bottom: -15px;">@Model.Price.ToString("# руб")</h1>
-            <div class="button-cart">
-                @Html.Action("HaveGadgetInCart", "Cart", new { gadgetid = Model.GadgetId })
-            </div>
         </div>
 
-        <div class="Description">
+        <div class="DescriptionTop">
             <div class="Specifications">
-                <br>
-                <h5>Подробные характеристики</h5>
                 <ul>
-                    @if (Model.DisplayId.HasValue)
-                    {
-                    if (Model.Display.Diagonal.HasValue)
-                    {
-                        <li>
-                            <span class="specification">Диагональ экрана: </span><span class="spec">@Model.Display.Diagonal</span>
-                        </li>
-                    }
-                    if (Model.Display.AspectRatioW.HasValue || Model.Display.AspectRatioH.HasValue)
-                    {
-                        <li>
-                            <span class="specification">Соотношение сторон: </span><span class="spec">
-                                @string.Format("{0}:{1}",
-                           Model.Display.AspectRatioW,
-                           Model.Display.AspectRatioH)
-                            </span>
-                        </li>
-                    }
-                    if (Model.Display.DisplayTechnologyId.HasValue)
-                    {
-                        <li>
-                            <span class="specification">Тип экрана: </span><span class="spec">@Model.Display.DisplayTechnology.Title</span>
-                        </li>
-                    }
-                    }
                     <li>
-                        <span class="specification">Количество памяти: </span><span class="spec">@Model.ROM.ToString("# Гбайт")</span>
+                        <span class="specification">Количество памяти: </span><span>@Model.ROM.ToString("# Гбайт")</span>
                     </li>
 
                     @if (Model.CameraId.HasValue)
                     {
                         <li>
-                            <span class="specification">Камера: </span><span class="spec">@Model.Camera.CameraResolution.ToString("# МП")</span>
+                            <span class="specification">Камера: </span><span>@Model.Camera.CameraResolution.ToString("# МП")</span>
                         </li>
                         <li>
-                            <span class="specification">Макс. разрешение видео: </span><span class="spec">@Model.Camera.VidResolutionW x @Model.Camera.VidResolutionH</span>
+                            <span class="specification">Макс. разрешение видео: </span><span>@Model.Camera.VidResolutionW x @Model.Camera.VidResolutionH</span>
                         </li>
                     }
 
                     <li>
-                        <span class="specification">Габариты: </span><span class="spec">@string.Format("{1}x{0}x{2}", Model.Casing.Width, Model.Casing.Height, Model.Casing.Thickness)</span>
+                        <span class="specification">Габариты: </span><span>@($"{Model.Casing.Height}x{Model.Casing.Width}x{Model.Casing.Thickness}")</span>
                     </li>
 
-                    @if (Model.Display.PPI.HasValue)
+                    @if (Model.DisplayId.HasValue && Model.Display.PPI.HasValue)
                     {
                         <li>
-                            <span class="specification">PPI: </span><span class="spec">@Model.Display.PPI</span>
+                            <span class="specification">PPI: </span><span>@Model.Display.PPI</span>
                         </li>
                     }
                     <li>
-                        <span class="specification">Вес: </span><span class="spec">@Model.Casing.Weight.ToString("# г.")</span>
+                        <span class="specification">Вес: </span><span>@Model.Casing.Weight.ToString("# г.")</span>
                     </li>
 
                     @if (!string.IsNullOrEmpty(Model.SIMType))
                     {
                         <li>
-                            <span class="specification">Тип симкарты: </span><span class="spec">@Model.SIMType</span>
+                            <span class="specification">Тип симкарты: </span><span>@Model.SIMType</span>
                         </li>
                     }
                     @if (Model.Casing.WaterResistantId.HasValue)
                     {
                         <li>
-                            <span class="specification">Наличие влагозащиты: </span><span class="spec">@Model.Casing.WaterResistant.Title</span>
+                            <span class="specification">Наличие влагозащиты: </span><span>@Model.Casing.WaterResistant.Title</span>
                         </li>
                     }
                     @if (!string.IsNullOrEmpty(Model.MiniJack))

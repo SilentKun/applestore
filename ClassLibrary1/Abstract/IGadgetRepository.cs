@@ -11,5 +11,6 @@
 
         IEnumerable<Company> Companies { get; }
         void SaveOrder(Order order);
+        void SaveGadget(Gadget gadget);
     }
 }
