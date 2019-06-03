@@ -16,7 +16,7 @@ namespace AppleStore.WebUI.Controllers
         {
             repository = repo;
         }
-        //[Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator")]
         public ViewResult Index()
         {
             return View(repository.Gadgets);
@@ -33,7 +33,7 @@ namespace AppleStore.WebUI.Controllers
             if (ModelState.IsValid)
             {
                 repository.SaveGadget(gadget);
-                TempData["message"] = string.Format("Изменения в игре \"{0}\" были сохранены", gadget.Name);
+                TempData["message"] = string.Format("Изменения в товаре \"{0}\" были сохранены", gadget.Name);
                 return RedirectToAction("Index");
             }
             else
@@ -41,6 +41,22 @@ namespace AppleStore.WebUI.Controllers
                 // Что-то не так со значениями данных
                 return View(gadget);
             }
+        }
+        public ViewResult Create()
+        {
+            return View("Edit", new Gadget());
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int gadgetId)
+        {
+            Gadget deletedGame = repository.DeleteGadget(gadgetId);
+            if (deletedGame != null)
+            {
+                TempData["message"] = string.Format("Товар \"{0}\" был удален",
+                    deletedGame.Name);
+            }
+            return RedirectToAction("Index");
         }
     }
 }

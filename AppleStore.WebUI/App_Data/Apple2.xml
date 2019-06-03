@@ -1,0 +1,66 @@
+﻿<gadgets>
+  <gadget>
+    <GadgetId>22</GadgetId>
+    <Name>iPhone 6 32Gb</Name>
+    <Category>iPhone 6</Category>
+    <Price>21490.00</Price>
+    <CPU>Apple A8</CPU>
+  </gadget>
+  <gadget>
+    <GadgetId>21</GadgetId>
+    <Name>iPhone 6S 32Gb Rose Gold</Name>
+    <Category>iPhone 6S</Category>
+    <Price>22990.00</Price>
+    <CPU>Apple A9</CPU>
+  </gadget>
+  <gadget>
+    <GadgetId>28</GadgetId>
+    <Name>iPad 2017 32Gb Wi-Fi Space Gray</Name>
+    <Category>iPad 2017</Category>
+    <Price>23990.00</Price>
+    <CPU>Apple A9</CPU>
+  </gadget>
+  <gadget>
+    <GadgetId>23</GadgetId>
+    <Name>iPhone SE 128Gb Rose Gold Розовое золото</Name>
+    <Category>iPhone SE</Category>
+    <Price>24190.00</Price>
+    <CPU>Apple A9</CPU>
+  </gadget>
+  <gadget>
+    <GadgetId>8</GadgetId>
+    <Name>iPhone SE 128Gb Gold Золотой</Name>
+    <Category>iPhone SE</Category>
+    <Price>24190.00</Price>
+    <CPU>Apple A9</CPU>
+  </gadget>
+  <gadget>
+    <GadgetId>27</GadgetId>
+    <Name>iPad 2018 128Gb Wi-Fi Silver</Name>
+    <Category>iPad 2018</Category>
+    <Price>27499.00</Price>
+    <CPU>Apple A10 Fusion</CPU>
+  </gadget>
+  <gadget>
+    <GadgetId>19</GadgetId>
+    <Name>iPhone 7 32Gb Black</Name>
+    <Category>iPhone 7</Category>
+    <Price>32990.00</Price>
+    <CPU>Apple A10 Fusion</CPU>
+  </gadget>
+  <gadget>
+    <GadgetId>29</GadgetId>
+    <Name>iPad Mini 4 128 Gb Wi-Fi + Celluar Gold</Name>
+    <Category>iPad Mini 4</Category>
+    <Price>33990.00</Price>
+    <CPU>Apple A8</CPU>
+  </gadget>
+  <gadget>
+    <GadgetId>20</GadgetId>
+    <Name>iPhone 6S Plus 32Gb Silver</Name>
+    <Category>iPhone 6S Plus</Category>
+    <Price>37990.00</Price>
+    <CPU>Apple A9</CPU>
+  </gadget>
+ 
+</gadgets>

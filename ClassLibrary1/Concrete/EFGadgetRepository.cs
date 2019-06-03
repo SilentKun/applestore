@@ -96,5 +96,15 @@
             }
             context.SaveChanges();
         }
+        public Gadget DeleteGadget(int gadgetId)
+        {
+            Gadget dbEntry = context.Gadgets.Find(gadgetId);
+            if (dbEntry != null)
+            {
+                context.Gadgets.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
     }
 }

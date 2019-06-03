@@ -15,7 +15,7 @@ namespace AppleStore.WebUI.Controllers
         {
             repository = repo;
         }
-
+  
         public ViewResult List(int categoryid = 0, int page = 1, bool canshowpageselector = true)
         {
             ViewBag.Gadgets = (from p in repository.Gadgets
@@ -37,6 +37,7 @@ namespace AppleStore.WebUI.Controllers
             ViewBag.CanShowPageSelector = canshowpageselector;
             return View();
         }
+
         public ViewResult Details(int gadgetId)
         {
             Gadget gadget = repository.Gadgets.Single(p => p.GadgetId == gadgetId);
