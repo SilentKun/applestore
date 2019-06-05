@@ -10,7 +10,7 @@ namespace AppleStore.WebUI.Controllers
     public class CartController : Controller
     {
         private readonly IGadgetRepository repository;
-        private IOrderProcessor orderProcessor;
+        private readonly IOrderProcessor orderProcessor;
 
         public CartController(IGadgetRepository repo, IOrderProcessor processor)
         {
@@ -63,7 +63,6 @@ namespace AppleStore.WebUI.Controllers
                 return View(shippingDetails);
             }
         }
-        [Authorize]
         public ViewResult Index(Cart cart, string returnUrl)
         {
             return View(new CartIndexViewModel
@@ -80,7 +79,7 @@ namespace AppleStore.WebUI.Controllers
 
         public RedirectToRouteResult AddToCart(Cart cart, int gadgetId, string returnUrl)
         {
-            Gadget gadget = repository.Gadgets
+            var gadget = repository.Gadgets
                 .FirstOrDefault(g => g.GadgetId == gadgetId);
 
             if (gadget != null)

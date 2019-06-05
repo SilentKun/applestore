@@ -1,0 +1,120 @@
+﻿@using System.Collections
+@using AppleStore.WebUI.Controllers
+@using Ninject.Infrastructure.Language
+@model AppleStore.Domain.Entities.Gadget
+
+@{
+    ViewBag.Title = "Админ панель: создание товара";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="panel">
+        <div class="panel-heading" style="text-align: center;margin-top: 15px">
+            <h3>Новый гаджет</h3>
+        </div>
+
+        @using (Html.BeginForm("Create", "Admin"))
+        {
+    <div class="panel-body" style="width: 500px; margin: 0 auto; text-align: center;">
+        @Html.HiddenFor(m => m.GadgetId)
+        <div class="form-group">
+
+            <p>Name</p>
+            @Html.TextBoxFor(m => Model.Name, new { @class = "form-control" })
+            <p>Price</p>
+            @Html.TextBoxFor(m => Model.Price, new { @class = "form-control" })
+
+            <p>Sensors</p>
+            @Html.TextBoxFor(m => Model.Sensors, new { @class = "form-control" })
+
+            <p>SIMType</p>
+            @Html.TextBoxFor(m => Model.SIMType, new { @class = "form-control" })
+
+            <p>ROM</p>
+            @Html.TextBoxFor(m => Model.ROM, new { @class = "form-control" })
+
+            <p>Category</p>
+            @Html.DropDownListFor(m => Model.CategoryId, ViewBag.mmm as SelectList, new { @class = "form-control" })
+
+            <p>Subcategory</p>
+            @Html.DropDownListFor(m => Model.SubcategoryId, ViewBag.mmm3 as SelectList, new { @class = "form-control" })
+
+            <p>BatteryCapacity</p>
+            @Html.TextBoxFor(m => Model.BatteryCapacity, new { @class = "form-control" })
+
+            <p>Equipment</p>
+            @Html.TextBoxFor(m => Model.Equipment, new { @class = "form-control" })
+
+            <p>MiniJack</p>
+            @Html.TextBoxFor(m => Model.MiniJack, new { @class = "form-control" })
+
+            <p>RAM</p>
+            @Html.TextBoxFor(m => Model.RAM, new { @class = "form-control" })
+
+            <p>CPU</p>
+            @Html.DropDownListFor(m => Model.CPUId, ViewBag.mmm4 as SelectList, "--", new { @class = "form-control" })
+
+            <p>Casing Height</p>
+            @Html.TextBoxFor(m => Model.Casing.Height, new { @class = "form-control" })
+
+            <p>Casing Width</p>
+            @Html.TextBoxFor(m => Model.Casing.Width, new { @class = "form-control" })
+
+            <p>Casing Thickness</p>
+            @Html.TextBoxFor(m => Model.Casing.Thickness, new { @class = "form-control" })
+
+            <p>Casing Weight</p>
+            @Html.TextBoxFor(m => Model.Casing.Weight, new { @class = "form-control" })
+
+            <p>Material</p>
+            @Html.DropDownListFor(m => Model.Casing.MaterialId, ViewBag.mmm5 as SelectList, "--", new { @class = "form-control" })
+
+            <p>WaterResistant</p>
+            @Html.DropDownListFor(m => Model.Casing.MaterialId, ViewBag.mmm6 as SelectList, "--", new { @class = "form-control" })
+
+            <p>Company</p>
+            @Html.DropDownListFor(m => Model.CompanyId, ViewBag.mmm1 as SelectList, new { @class = "form-control" })
+
+            <p>OperatingSystem</p>
+            @Html.DropDownListFor(m => Model.OperatingSystemId, ViewBag.mmm2 as SelectList, new { @class = "form-control" })
+
+            <p>CameraResolution</p>
+            @Html.TextBoxFor(m => Model.Camera.CameraResolution, new { @class = "form-control" })
+
+            <p>VidResolutionH</p>
+            @Html.TextBoxFor(m => Model.Camera.VidResolutionH, new { @class = "form-control" })
+
+            <p>VidResolutionW</p>
+            @Html.TextBoxFor(m => Model.Camera.VidResolutionW, new { @class = "form-control" })
+
+            <p>AspectRatioH</p>
+            @Html.TextBoxFor(m => Model.Display.AspectRatioH, new { @class = "form-control" })
+
+            <p>AspectRatioW</p>
+            @Html.TextBoxFor(m => Model.Display.AspectRatioW, new { @class = "form-control" })
+
+            <p>ResolutionH</p>
+            @Html.TextBoxFor(m => Model.Display.ResolutionH, new { @class = "form-control" })
+
+            <p>ResolutionW</p>
+            @Html.TextBoxFor(m => Model.Display.ResolutionW, new { @class = "form-control" })
+            <p>Diagonal</p>
+            @Html.TextBoxFor(m => Model.Display.Diagonal, new { @class = "form-control" })
+
+            <p>PPI</p>
+            @Html.TextBoxFor(m => Model.Display.PPI, new { @class = "form-control" })
+
+            <p>DisplayTechnology</p>
+            @Html.DropDownListFor(m => Model.Display.DisplayTechnologyId, ViewBag.mmm7 as SelectList, "--", new { @class = "form-control" })
+
+        </div>
+    </div>
+            <div class="panel-footer" style="text-align: center;margin-top: 40px">
+                <input type="submit" value="Сохранить" class="btn btn-outline-dark my-2 my-sm-0" />
+                @Html.ActionLink("Отменить изменения и вернуться к списку", "Index", null, new
+                {
+                    @class = "btn btn-outline-dark my-2 my-sm-0"
+                })
+            </div>
+        }
+    </div>

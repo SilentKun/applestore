@@ -36,6 +36,7 @@
         public IEnumerable<OperatingSystem> OperatingSystems => context.OperatingSystems;
         public IEnumerable<Company> Companies => context.Companies;
         public IEnumerable<WaterResistant> WaterResistants => context.WaterResistants;
+
         public IEnumerable<Material> Materials => context.Materials;
         public IEnumerable<DisplayTechnology> DisplayTechnologies => context.DisplayTechnologies;
         public IEnumerable<Category> Categories
@@ -92,6 +93,11 @@
                 dbEntry.CompanyId = gadget.CompanyId;
                 dbEntry.OperatingSystemId = gadget.OperatingSystemId;
 
+
+            }
+            else
+            {
+                context.Gadgets.Add(gadget);
 
             }
             context.SaveChanges();
