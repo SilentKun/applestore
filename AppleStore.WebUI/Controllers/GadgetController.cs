@@ -48,7 +48,7 @@ namespace AppleStore.WebUI.Controllers
         public ActionResult Search(string target, int page = 1)
         {
             ViewBag.Gadgets = (from g in repository.Gadgets
-                               where g.Name.Contains(target)
+                               where g.Name.IndexOf(target, System.StringComparison.OrdinalIgnoreCase) != -1
                                select g)
                               .Skip((page - 1) * pageSize)
                               .Take(pageSize).Reverse();
@@ -57,7 +57,7 @@ namespace AppleStore.WebUI.Controllers
             {
                 CurrentPage = page,
                 ItemsPerPage = pageSize,
-                TotalItems = repository.Gadgets.Where(g => g.Name.Contains(target)).Count()
+                TotalItems = repository.Gadgets.Where(g => g.Name.IndexOf(target, System.StringComparison.OrdinalIgnoreCase) != -1).Count()
             };
 
             ViewBag.SearchValue = target;

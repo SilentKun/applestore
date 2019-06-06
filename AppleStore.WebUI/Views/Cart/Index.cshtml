@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "iGadget Store: Корзина";
 }
-<div class="container" style="background-color: #fff;padding: 1em;margin-top: 30px;">
+<div class="container" style="background-color: #fff;padding: 1em;box-shadow: 1px 1px 11px 1px rgba(30, 30, 30, 0.1);margin-top: 30px;">
     <div class="result-menu" style="text-align: center">
         <div id="Result">Итого</div>
         <div>
@@ -35,25 +35,22 @@
                 
             </div>
             <div class="count-cart">
-                <ul class="input-count-style">
+                <ul class="input-count-style" style="margin-top:60px">
                     <li>
-                        @using (Html.BeginForm("AddToCart", "Cart"))
-                        {
-                            @Html.Hidden("GadgetId", line.Gadget.GadgetId)
-                            @Html.HiddenFor(x => x.ReturnUrl)
-                            <button class="count-plus">+</button>
-                        }
-                    </li>
-                    <li>
-                        <input class="count-input" type="text" placeholder="0" maxlenght="3" value="@line.Quantity">
-                    </li>
-                    <li>
-                        @using (Html.BeginForm("RemoveOne", "Cart"))
+                        @using (Html.BeginForm("RemoveOne", "Cart", FormMethod.Get, new { @style = "display:inline-block" }))
                         {
                             @Html.Hidden("GadgetId", line.Gadget.GadgetId)
                             @Html.HiddenFor(x => x.ReturnUrl)
                             <button class="count-minus">-</button>
                         }
+                        <input class="count-input" type="text" placeholder="0" maxlenght="3" readonly value="@line.Quantity" style="display:inline-block">
+                        @using (Html.BeginForm("AddToCart", "Cart", FormMethod.Get, new { @style = "display:inline-block" }))
+                        {
+                            @Html.Hidden("GadgetId", line.Gadget.GadgetId)
+                            @Html.HiddenFor(x => x.ReturnUrl)
+                            <button class="count-plus">+</button>
+                        }
+
                     </li>
                 </ul>
             </div>
@@ -67,13 +64,9 @@
                     @Html.Hidden("GadgetId", line.Gadget.GadgetId)
                     @Html.HiddenFor(x => x.ReturnUrl)
                     <input type="image" src="~/image/trash-alt-solid.svg" name="submit">
-                    
                 }
             </div>
-          
-            <div id="bottom-cart-line">
 
-            </div>
         </div>
 
     }
@@ -85,7 +78,14 @@
         }
         @if (HttpContext.Current.User.Identity.IsAuthenticated)
         {
-            @Html.ActionLink("Оформить заказ", "Checkout", null, new {type = "buttonNext", @class = "btn btn-outline-dark my-2 my-sm-0"})
+            if (Model.Cart.ItemsCount() > 0)
+            {
+            @Html.ActionLink("Оформить заказ", "Checkout", null, new { type = "buttonNext", @class = "btn btn-outline-dark my-2 my-sm-0" })
+            }
+            else
+            {
+                <p>Корзина пуста!</p>
+            }
         }
         else
         {
