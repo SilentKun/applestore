@@ -8,6 +8,7 @@ using AppleStore.Domain.Entities;
 using AppleStore.WebUI.Controllers;
 using AppleStore.WebUI.Models;
 using Moq;
+using AppleStore.Domain.Concrete;
 
 namespace AppleStore.UnitTests
 {
@@ -106,15 +107,17 @@ namespace AppleStore.UnitTests
         {
             // Организация - создание имитированного хранилища
             Mock<IGadgetRepository> mock = new Mock<IGadgetRepository>();
-            mock.Setup(m => m.Gadgets).Returns(new List<Gadget> {
-        new Gadget {GadgetId = 1, Name = "Гаджет1", Category = "Кат1"},
-    }.AsQueryable());
-
+            mock.Setup(m => m.Gadgets).Returns(
+                new List<Gadget> { new Gadget {GadgetId = 1, Name = "Гаджет1", CategoryId = 1, SubcategoryId = 1, Price = 2000},}.AsQueryable()
+            );
+            Mock<IOrderProcessor> mock2 = new Mock<IOrderProcessor>();
+            IOrderProcessor io = new EmailOrderProcessor(new EmailSettings());
+            mock2.Setup(m => m).Returns(io);
             // Организация - создание корзины
             Cart cart = new Cart();
 
             // Организация - создание контроллера
-            CartController controller = new CartController(mock.Object);
+            CartController controller = new CartController(mock.Object, mock2.Object);
 
             // Действие - добавить игру в корзину
             controller.AddToCart(cart, 1, null);
@@ -132,15 +135,19 @@ namespace AppleStore.UnitTests
         {
             // Организация - создание имитированного хранилища
             Mock<IGadgetRepository> mock = new Mock<IGadgetRepository>();
-            mock.Setup(m => m.Gadgets).Returns(new List<Gadget> {
-        new Gadget {GadgetId = 1, Name = "Гаджет1", Category = "Кат1"},
-    }.AsQueryable());
+            mock.Setup(m => m.Gadgets).Returns(
+                new List<Gadget> { new Gadget { GadgetId = 1, Name = "Гаджет1", CategoryId = 1, SubcategoryId = 1, Price = 2000 }, }.AsQueryable()
+            );
+            Mock<IOrderProcessor> mock2 = new Mock<IOrderProcessor>();
+            IOrderProcessor io = new EmailOrderProcessor(new EmailSettings());
+            mock2.Setup(m => m).Returns(io);
 
             // Организация - создание корзины
             Cart cart = new Cart();
 
             // Организация - создание контроллера
-            CartController controller = new CartController(mock.Object);
+            CartController controller = new CartController(mock.Object, mock2.Object);
+
 
             // Действие - добавить игру в корзину
             RedirectToRouteResult result = controller.AddToCart(cart, 2, "myUrl");
@@ -158,7 +165,7 @@ namespace AppleStore.UnitTests
             Cart cart = new Cart();
 
             // Организация - создание контроллера
-            CartController target = new CartController(null);
+            CartController target = new CartController(null, null);
 
             // Действие - вызов метода действия Index()
             CartIndexViewModel result

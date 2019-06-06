@@ -18,13 +18,14 @@ namespace AppleStore.WebUI.Controllers
   
         public ViewResult List(int categoryid = 0, int page = 1, bool canshowpageselector = true)
         {
-            ViewBag.Gadgets = (from p in repository.Gadgets
+            var gadgets = (from p in repository.Gadgets
                                where categoryid == 0 || p.SubcategoryId == categoryid
                                orderby p.GadgetId
                                select p).Reverse()
                               .Skip((page - 1) * pageSize)
                               .Take(pageSize);
 
+            ViewBag.Gadgets = gadgets;
             ViewBag.PagingInfo = new PagingInfo
             {
                 CurrentPage = page,
@@ -35,7 +36,7 @@ namespace AppleStore.WebUI.Controllers
             };
 
             ViewBag.CanShowPageSelector = canshowpageselector;
-            return View();
+            return View(gadgets);
         }
 
         public ViewResult Details(int gadgetId)

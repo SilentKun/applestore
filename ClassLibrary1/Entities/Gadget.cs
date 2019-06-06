@@ -25,14 +25,19 @@
 
         [StringLength(50, MinimumLength = 3)]
         public string SIMType { get; set; }
-        [StringLength(50, MinimumLength = 3)]
+
+        [StringLength(30, MinimumLength = 3)]
         public string MiniJack { get; set; }
+
         [StringLength(50, MinimumLength = 3)]
         public string BatteryCapacity { get; set; }
-        [StringLength(50, MinimumLength = 3)]
+
+        [StringLength(100, MinimumLength = 3)]
         public string Sensors { get; set; }
-        [StringLength(50, MinimumLength = 3)]
+
+        [StringLength(100, MinimumLength = 3)]
         public string Equipment { get; set; }
+
         public int RAM { get; set; }
         public int ROM { get; set; }
 

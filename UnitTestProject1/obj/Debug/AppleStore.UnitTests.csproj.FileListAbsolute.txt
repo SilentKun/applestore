@@ -49,3 +49,5 @@ C:\Users\SilentKun\source\repos\AppleStore\UnitTestProject1\obj\Debug\AppleStore
 C:\Users\SilentKun\source\repos\AppleStore\UnitTestProject1\obj\Debug\AppleStore.UnitTests.csproj.CopyComplete
 C:\Users\SilentKun\source\repos\AppleStore\UnitTestProject1\obj\Debug\UnitTestProject1.dll
 C:\Users\SilentKun\source\repos\AppleStore\UnitTestProject1\obj\Debug\UnitTestProject1.pdb
+C:\Users\Fortis\Source\Repos\applestore\UnitTestProject1\obj\Debug\AppleStore.UnitTests.csprojAssemblyReference.cache
+C:\Users\Fortis\Source\Repos\applestore\UnitTestProject1\obj\Debug\AppleStore.UnitTests.csproj.CoreCompileInputs.cache
