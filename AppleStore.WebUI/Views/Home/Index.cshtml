@@ -1,8 +1,6 @@
-﻿@using System.Collections
-@using AppleStore.Domain.Entities
-@using AppleStore.WebUI.Controllers
+﻿@using AppleStore.WebUI.Controllers
 @model IEnumerable<AppleStore.WebUI.Controllers.OrderStr>
-<div class="container" style="background-color: #fff;padding: 1em;margin-top: 30px;">
+<div class="container" style="min-width: 700px;max-width:700px;padding:1em;margin-top:20px;box-shadow: 1px 1px 11px 1px rgba(30, 30, 30, 0.1); background-color:#fff;">
     @if (HttpContext.Current.User.Identity.IsAuthenticated)
     {
         <div class="hello" style="text-align: center">
@@ -13,20 +11,17 @@
         </div>
         foreach (var line in (IEnumerable<OrderStr>)ViewBag.List)
         {
-<div class="cartstyles" style="width: 70%;margin: 25px auto">
+<div class="cartstyles" style="width: 90%;margin: 25px auto">
 
     <div class="img-cart">
         <p> <img src="@Url.Action("GetImage", "Gadget", new { line.Gadget.GadgetId })" alt="" class="picInBasket"></p>
     </div>
-    <div class="title-cart">
+    <div class="title-cart" style="width:unset">
         <p> <a href="/Gadget/Details?gadgetId=@line.Gadget.GadgetId">@line.Gadget.Name</a> </p>
     </div>
 
     <div class="price-product">
         <h5>@line.Gadget.Price.ToString($"{line.Count} x # ₽")</h5> <p></p>
-    </div>
-
-    <div id="bottom-cart-line">
     </div>
 </div>
 

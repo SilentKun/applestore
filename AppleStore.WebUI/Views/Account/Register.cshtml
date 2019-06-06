@@ -1,10 +1,10 @@
 ﻿@model AppleStore.WebUI.Models.RegisterModel
 
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Регистрация";
 }
-<div class="container">
-    <h2  class="title-h31">Регистрация</h2>
+<div class="container" style="min-width: 500px;max-width:500px;padding:1em;margin-top:20px;box-shadow: 1px 1px 11px 1px rgba(30, 30, 30, 0.1); background-color:#fff;">
+    <h2  class="title-h31"  style="margin-left:0px">Регистрация</h2>
 
 
     @using (Html.BeginForm())
@@ -13,7 +13,7 @@
 
 
        
-        <ul id="auth">
+        <ul id="auth" style="margin: 0 auto;padding: 0;">
             @Html.ValidationSummary()
             <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
             <li>
