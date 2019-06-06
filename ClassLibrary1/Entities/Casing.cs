@@ -3,7 +3,6 @@
     public class Casing
     {
         public int Id { get; set; }
-        public int GadgetId { get; set; }
         public int Weight { get; set; }
         public int? MaterialId { get; set; }
         public int? WaterResistantId { get; set; }

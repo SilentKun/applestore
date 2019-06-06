@@ -23,7 +23,7 @@
                         </li>
                     }
                     <li>
-                        <span class="specification">Разработчик: </span> <span>@Model.Company.Title</span>
+                        <span class="specification">Разработчик: </span> <span>@Model.Category.Company.Title</span>
                     </li>
                     <li>
                         <span class="specification">Операционная система: </span> <span>@Model.OperatingSystem.Title</span>
@@ -51,7 +51,7 @@
                                 <span class="specification">Диагональ экрана: </span><span>@Model.Display.Diagonal</span>
                             </li>
                         }
-                        if (Model.Display.AspectRatioW.HasValue || Model.Display.AspectRatioH.HasValue)
+                        if (Model.Display.AspectRatioW.HasValue && Model.Display.AspectRatioH.HasValue)
                         {
                             <li>
                                 <span class="specification">Соотношение сторон: </span><span>@($"{Model.Display.AspectRatioW}:{Model.Display.AspectRatioH}")</span>
@@ -77,12 +77,18 @@
 
                     @if (Model.CameraId.HasValue)
                     {
+                        if (Model.Camera.CameraResolution.HasValue)
+                        {
                         <li>
-                            <span class="specification">Камера: </span><span>@Model.Camera.CameraResolution.ToString("# МП")</span>
+                            <span class="specification">Камера: </span><span>@Model.Camera.CameraResolution.Value.ToString("# МП")</span>
                         </li>
+                        }
+                        if (Model.Camera.VidResolutionH.HasValue && Model.Camera.VidResolutionW.HasValue)
+                        {
                         <li>
                             <span class="specification">Макс. разрешение видео: </span><span>@Model.Camera.VidResolutionW x @Model.Camera.VidResolutionH</span>
                         </li>
+                        }
                     }
 
                     <li>

@@ -3,7 +3,6 @@
     public class Display
     {
         public int Id { get; set; }
-        public int GadgetId { get; set; }
         public int? ResolutionW { get; set; }
         public int? ResolutionH { get; set; }
         public decimal? Diagonal { get; set; }

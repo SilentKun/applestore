@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using System.Web.Mvc;
-using AppleStore.Domain.Abstract;
-using AppleStore.Domain.Entities;
-
-namespace AppleStore.WebUI.Controllers
+﻿namespace AppleStore.WebUI.Controllers
 {
+    using System.Linq;
+    using System.Web.Mvc;
+    using AppleStore.Domain.Abstract;
+    using AppleStore.Domain.Entities;
+
     [Authorize(Roles = "Administrator")]
     public class AdminController : Controller
     {
@@ -17,11 +17,17 @@ namespace AppleStore.WebUI.Controllers
             return View(repository.Gadgets);
         }
 
-
+        [HttpGet]
+        public ViewResult Create()
+        {
+            SetViewBag();
+            return View(new Gadget());
+        }
+        [HttpGet]
         public ViewResult Edit(int gadgetId)
         {
-            var gadget = repository.Gadgets
-                .FirstOrDefault(g => g.GadgetId == gadgetId);
+            var gadget = repository.Gadgets.FirstOrDefault(g => g.GadgetId == gadgetId);
+            SetViewBag(gadget);
             return View(gadget);
         }
 
@@ -31,14 +37,13 @@ namespace AppleStore.WebUI.Controllers
             if (ModelState.IsValid)
             {
                 repository.SaveGadget(gadget);
-                TempData["message"] = string.Format("Изменения в товаре \"{0}\" были сохранены", gadget.Name);
+                TempData["message"] = $"Изменения в товаре \"{gadget.Name}\" были сохранены";
                 return RedirectToAction("Index");
             }
 
-            // Что-то не так со значениями данных
+            SetViewBag(gadget);
             return View(gadget);
         }
-
 
         [HttpPost]
         public ActionResult Create(Gadget gadget)
@@ -46,26 +51,11 @@ namespace AppleStore.WebUI.Controllers
             if (ModelState.IsValid)
             {
                 repository.SaveGadget(gadget);
-                TempData["message"] = string.Format("Изменения в товаре \"{0}\" были сохранены", gadget.Name);
+                TempData["message"] = $"Успешно добавлен \"{gadget.Name}\"";
                 return RedirectToAction("Index");
             }
-
-            // Что-то не так со значениями данных
+            SetViewBag();
             return View(gadget);
-        }
-
-        public ViewResult Create()
-        {
-            ViewBag.mmm = new SelectList(repository.Categories, "Id", "Title");
-            ViewBag.mmm1 = new SelectList(repository.Companies, "Id", "Title");
-            ViewBag.mmm2 = new SelectList(repository.OperatingSystems, "Id", "Title");
-            ViewBag.mmm3 = new SelectList(repository.Subcategories, "Id", "Title");
-            ViewBag.mmm4 = new SelectList(repository.CPUs, "Id", "Title");
-            ViewBag.mmm5 = new SelectList(repository.Materials, "Id", "Title");
-            ViewBag.mmm6 = new SelectList(repository.WaterResistants, "Id", "Title");
-            ViewBag.mmm7 = new SelectList(repository.DisplayTechnologies, "Id", "Title");
-
-            return View(new Gadget());
         }
 
         [HttpPost]
@@ -77,6 +67,17 @@ namespace AppleStore.WebUI.Controllers
                 TempData["message"] = $"Товар \"{deletedGame.Name}\" был удален";
             }
             return RedirectToAction("Index");
+        }
+
+        public void SetViewBag(Gadget gadget = null)
+        {
+            ViewBag.Categories = new SelectList(repository.Categories, "Id", "Title", gadget == null ? null : gadget.Category);
+            ViewBag.Subcategories = new SelectList(repository.Subcategories, "Id", "Title", gadget == null ? null : gadget.Subcategory);
+            ViewBag.OperatingSystems = new SelectList(repository.OperatingSystems, "Id", "Title", gadget == null ? null : gadget.OperatingSystem);
+            ViewBag.CPUs = new SelectList(repository.CPUs, "Id", "Title", gadget == null ? null : gadget.CPU);
+            ViewBag.Materials = new SelectList(repository.Materials, "Id", "Title", gadget == null ? null : gadget.Casing.Material);
+            ViewBag.WaterResistants = new SelectList(repository.WaterResistants, "Id", "Title", gadget == null ? null : gadget.Casing.WaterResistant);
+            ViewBag.DisplayTechnologies = new SelectList(repository.DisplayTechnologies, "Id", "Title", gadget == null ? null : gadget.Display.DisplayTechnology);
         }
     }
 }

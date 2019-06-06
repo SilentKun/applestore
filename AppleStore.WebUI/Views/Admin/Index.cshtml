@@ -4,13 +4,25 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style type="text/css">
+    .table td, .table th {
+        padding: .7rem;
+        vertical-align: middle;
+        border-top: 1px solid #dee2e6;
+    }
+</style>
 
-<p>
-    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-default" })
-</p>
+@using (Html.BeginForm("Create", "Admin", FormMethod.Get, new { @style = "text-align: center;margin-top: 25px;margin-bottom: 20px"}))
+{
+    <input type="submit" class="btn btn-outline-success btn-xs" value="Добавить новый гаджет" />
+}
 
-<table class="table" style="background-color: #fff;text-align: center;width: 1000px;margin: 0 auto; box-shadow: 1px 1px 11px 1px rgba(30, 30, 30, 0.1);">
+<table class="table" style="background-color: #fff;text-align: center; width: 1000px;margin: 0 auto; box-shadow: 1px 1px 11px 1px rgba(30, 30, 30, 0.1);">
+    <p style="text-align: center">@TempData["message"]</p>
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.GadgetId)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -24,39 +36,44 @@
             @Html.DisplayNameFor(model => model.Price)
         </th>
         <th></th>
+        <th></th>
     </tr>
 
-    @foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Name)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.CategoryId)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.SubcategoryId)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Price)
-    </td>
-    <td>
-    @Html.ActionLink("Редактировать", "Edit", new { gadgetId = item.GadgetId })
-    </td>
-    @*      <td>*@
-    @*@Html.ActionLink("Edit", "Edit", new { id=item.GadgetId }) |
-         |
-        @Html.ActionLink("Delete", "Delete", new { id=item.GadgetId })*@
-    @*   </td> *@
-    <td>  @using (Html.BeginForm("Delete", "Admin"))
-          {
-              @Html.Hidden("GadgetId", item.GadgetId)
-              <input type="submit"
-                     class="btn btn-default btn-xs"
-                     value="Удалить" />
-          }
-    </td> 
-</tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GadgetId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubcategoryId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @using (Html.BeginForm("Edit", "Admin", FormMethod.Get))
+                {
+                    @Html.Hidden("GadgetId", item.GadgetId)
+                    <input type="submit" class="btn btn-outline-info btn-xs" value="Редактировать" />
+                }
+                @*@Html.ActionLink("Редактировать", "Edit", new { gadgetId = item.GadgetId })*@
+            </td>
+
+            <td>
+                @using (Html.BeginForm("Delete", "Admin"))
+                {
+                    @Html.Hidden("GadgetId", item.GadgetId)
+                    <input type="submit" class="btn btn-outline-danger btn-xs" value="Удалить" />
+                }
+            </td>
+        </tr>
     }
 
 </table>

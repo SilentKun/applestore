@@ -40,6 +40,11 @@
                         <span>|</span>
                         @if (HttpContext.Current.User.Identity.IsAuthenticated)
                         {
+                            if (HttpContext.Current.User.IsInRole("Administrator"))
+                            {
+                                <a href='@Url.Action("Index", "Admin")'>Админ-панель</a>
+                                <span>|</span>
+                            }
                             <a href='@Url.Action("Index", "Home")'>Личный кабинет</a>
                             <span>|</span>
                             <a href='@Url.Action("Logout", "Account")'>Выход</a>
